@@ -1,14 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config.config import Configuration
-# from app.admin import admin_panel
 
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
 
 db = SQLAlchemy(app)
 
-
-
-# from app.admin import view_admin
+migrate = Migrate(app, db)
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
