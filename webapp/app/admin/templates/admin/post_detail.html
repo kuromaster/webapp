@@ -1,0 +1,20 @@
+{% extends 'includes/layout.html' %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+
+
+{% block body %}
+<main class="container">
+  <div class="bg-light p-5 rounded">
+
+    <h1>{{ post.title }}</h1>
+    <div><p>{{ post.body }} </p></div>
+
+  </div>
+</main>
+
+
+{% endblock %}
