@@ -54,12 +54,19 @@ def index():
         page = 1
 
     if q:
-        posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)) #.all()
+        posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q))  # .all()
     else:
         # posts = Post.query.all()
         posts = Post.query.order_by(Post.created.desc())
 
-    pages = posts.paginate(page=page, per_page=5)
+    pages = posts.paginate(page=page, per_page=7)
+    # for i in dir(pages):
+    #     cprint("GREEN", "{}".format(i))
+    #
+    # cprint("YELLOW", pages.per_page)
+    # cprint("PURPLE", pages.total)
+    # for post in pages.items:
+    #     cprint("GREEN", "pages: {}".format(post.body))
 
     return render_template("admin/home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), form=form, pages=pages)
 

@@ -21,14 +21,58 @@
   <div class="bg-light p-5 rounded">
 
     <!-- BEGIN Posts list -->
+
+    <div class="row">
+    <div class="accordion" id="accordionExample">
     {% for post in pages.items %}
-      <p><a href="{{ url_for('admin.post_detail', slug=post.slug) }}">{{ post.title }}</a></p>
+
+
+
+      <div class="card">
+        <div class="card-header" id="post{{post.id}}">
+          <h2 class="clearfix mb-0">
+            <a
+              class="btn btn-link {% if not loop.index == 1 %}collapsed{% endif %}"
+              data-toggle="collapse"
+              data-target="#collapse_{{loop.index}}"
+              aria-expanded="{% if loop.index == 1 %}true{% else %}false{%endif%}"
+              aria-controls="collapse_{{loop.index}}">
+
+              <div class="d-flex">
+                <div class="mr-auto">{{ post.title }} </div>
+                <div class="mr-3">{{post.created}}</div>
+
+                <div class=""><i class="material-icons">add</i>
+
+                </div>
+              </div>
+            </a>
+          </h2>
+
+        </div>
+
+        <div
+          id="collapse_{{loop.index}}"
+          class="collapse {% if loop.index == 1 %}show{% endif %}"
+          aria-labelledby="post{{post.id}}"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body">
+
+            <br>
+            {{ post.body|safe  }}
+          </div>
+        </div>
+      </div>
     {% endfor %}
+    </div>
+    </div>
+
   <!-- END Posts list -->
 
     <!-- НАЧАЛО Разбиение по страницам -->
     <nav>
-      <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+      <div class="hint-text">Showing <b>{{pages.per_page}}</b> out of <b>{{pages.total}}</b> entries</div>
       <ul class="pagination">
         <li {% if not pages.has_prev %} class="page-item disabled" {% endif %}>
           <a class="page-link" href="./?page={{pages.prev_num}}">Предыдущая</a>
@@ -63,7 +107,11 @@
           {% for field in form %}
           <div class="form-group">
             {{field.label(class='col-from-label')}}
-            {{field(class='form-control')}}
+            {% if field.name == 'body' %}
+              {{field(class='form-control summernote')}}
+            {% else %}
+              {{field(class='form-control')}}
+            {%endif%}
           </div>
           {% endfor %}
 

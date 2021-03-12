@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+  $('.summernote').summernote({
+    hieght: 600
+  });
+
+	// Add minus icon for collapse element which is open by default
+	$(".collapse.show").each(function(){
+		$(this).siblings(".card-header").find(".btn i").html("remove");
+		$(this).prev(".card-header").addClass("highlight");
+	});
+
+	// Toggle plus minus icon on show hide of collapse element
+	$(".collapse").on('show.bs.collapse', function(){
+		$(this).parent().find(".card-header .btn i").html("remove");
+	}).on('hide.bs.collapse', function(){
+		$(this).parent().find(".card-header .btn i").html("add");
+	});
+
+	// Highlight open collapsed element
+	$(".card-header .btn").click(function(){
+		$(".card-header").not($(this).parents()).removeClass("highlight");
+		$(this).parents(".card-header").toggleClass("highlight");
+	});
+});
+</script>
