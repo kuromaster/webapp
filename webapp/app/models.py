@@ -8,6 +8,20 @@ from slugify import slugify
 #     pattern = r'[^\w+]'
 #     return re.sub(pattern, '-', s)
 
+# class tag_membership(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     post_id = db.Column(db.Integer)
+#     tag_id = db.Column(db.Integer)
+
+
+tag_membership = db.Table(
+
+    'tag_membership',
+    db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+
+)
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +34,8 @@ class Post(db.Model):
         super(Post, self).__init__(*args, **kwargs)
         self.generate_slug()
 
+    tags = db.relationship('Tag', secondary=tag_membership, backref=db.backref('posts', lazy='dynamic'))
+
     def generate_slug(self):
         if self.title:
             self.slug = '{}-{}'.format(slugify(self.title), str(datetime.now().timestamp()))
@@ -30,7 +46,7 @@ class Post(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True)
     slug = db.Column(db.String(100))
 
     def __init__(self, *args, **kwargs):

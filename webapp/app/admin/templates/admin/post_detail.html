@@ -9,9 +9,17 @@
 {% block body %}
 <main class="container">
   <div class="bg-light p-5 rounded">
-
-    <h1>{{ post.title }}</h1>
-    <div><p>{{ post.body }} </p></div>
+    <div class="post-title">
+      <h1>{{ post.title }}</h1>
+    </div>
+    <div class="tags">
+      {% for tag in tags %}
+        <a class="badge badge-primary" href="{{ url_for('admin.tag_detail', slug=tag.slug) }}" role="button">{{tag.name}}</a>
+      {% endfor %}
+    </div>
+    <br>
+    <br>
+    <div class="post-body"><p>{{ post.body }} </p></div>
 
   </div>
 </main>

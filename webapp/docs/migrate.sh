@@ -6,4 +6,4 @@ python manage.py db migrate
 
 
 # в помощь миграции - обновление таблицы и полей
-python manage.py db upgrade head
+python manage.py db upgrade
