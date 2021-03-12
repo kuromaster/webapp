@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
       {% block title %}
-      
+
       {% endblock %}
 
     </title>
@@ -29,9 +29,9 @@
 
 
     {% if url_prefix is defined %}
-      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' %}
+      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' ignore missing %}
     {% else %}
-      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' %}
+      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' ignore missing %}
     {% endif %}
 
 
@@ -48,9 +48,9 @@
     <script src="/static/js/bootstrap/4.6.0/bootstrap.min.js"></script>
 
     {% if url_prefix is defined %}
-      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' %}
+      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' ignore missing %}
     {% else %}
-      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' %}
+      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' ignore missing %}
     {% endif %}
 
 

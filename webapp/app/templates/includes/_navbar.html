@@ -105,10 +105,10 @@
     </ul>
 
 
-    <!-- <form class="d-flex hide">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="d-flex" method="GET">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.args.get('q','') }}">
       <button class="btn btn-outline-info btn-nav-search-my" type="submit">Search</button>
-    </form> -->
+    </form>
 
 
     <ul class="navbar-nav ">
