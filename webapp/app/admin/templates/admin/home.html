@@ -17,14 +17,36 @@
   </div>
   <br>
 
+
   <div class="bg-light p-5 rounded">
-    {% for post in posts %}
+
+    <!-- BEGIN Posts list -->
+    {% for post in pages.items %}
       <p><a href="{{ url_for('admin.post_detail', slug=post.slug) }}">{{ post.title }}</a></p>
     {% endfor %}
+  <!-- END Posts list -->
+
+    <!-- НАЧАЛО Разбиение по страницам -->
+    <nav>
+      <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+      <ul class="pagination">
+        <li {% if not pages.has_prev %} class="page-item disabled" {% endif %}>
+          <a class="page-link" href="./?page={{pages.prev_num}}">Предыдущая</a>
+        </li>
+        {%for page in pages.iter_pages() %}
+          <li {% if page == pages.page %} class="page-item active" {% endif %} ><a class="page-link" href="./?page={{page}}">{{page}}</a></li>
+        {% endfor %}
+        <li {% if not pages.has_next %} class="page-item disabled" {% endif %}>
+          <a class="page-link" href="./?page={{pages.next_num}}">Следующая</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- КОНЕЦ Разбиение по страницам -->
+
   </div>
 </main>
 
-
+<!-- BEGIN Create post modal -->
 <div class="modal fade" id="modalCreatePost" tabindex="-1" aria-labelledby="modalCreatePostLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -55,5 +77,6 @@
     </div>
   </div>
 </div>
+<!-- END Create post modal -->
 
 {% endblock %}

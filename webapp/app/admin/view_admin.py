@@ -46,13 +46,22 @@ def index():
 
     form = PostForm()
     q = request.args.get('q')
+
+    page = request.args.get('page')
+    if page and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
     if q:
-        posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)).all()
+        posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)) #.all()
     else:
         # posts = Post.query.all()
         posts = Post.query.order_by(Post.created.desc())
 
-    return render_template("admin/home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), posts=posts, form=form)
+    pages = posts.paginate(page=page, per_page=5)
+
+    return render_template("admin/home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), form=form, pages=pages)
 
 
 @admin_panel.route('/post/<slug>')
