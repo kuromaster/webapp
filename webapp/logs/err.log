@@ -1,0 +1,6 @@
+
+[2021-03-14 20:24:42] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v2/webapp/app/admin/view_admin.py", line 94, in post_edit
+    form = PostForm(formdata=request.form, obj=post1)
+NameError: name 'post1' is not defined
+ 

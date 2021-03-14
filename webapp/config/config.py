@@ -12,6 +12,7 @@ class Configuration(object):
     DBUSER = os.getenv("DBUSER")
     DBPASWD = os.getenv("DBPASWD")
     DBNAME = os.getenv("DBNAME")
+    ERR_PTH = os.getenv("ERR_PTH")
 
     # SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://pythonuser:flaskdefault@localhost:3306/webappdb'
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@localhost:3306/{}'.format(DBUSER, DBPASWD, DBNAME)
