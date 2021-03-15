@@ -1,0 +1,305 @@
+@media (max-width: 800px) {
+  .flex-post-title, .flex-pagination-post {
+    flex-direction: column;
+  }
+  .post-toogle-icon {
+    visibility: hidden;
+    display:none;
+  }
+  .pagination {
+    padding-top: 10px;
+    align-self: center;
+  }
+  .hint-text {
+    align-self: center;
+  }
+
+  /* .pagination li a.mypage-prev {
+    content: '&laquo' ! important;
+    background-color: #000 ! important;
+    color: #ed1414 ! important;
+
+  }
+
+  .pagination li a.mypage-prev:after {
+    content: &laquo;
+    display: block;
+  }
+
+  .pagination .page-item .disabled a {
+    content: '&laquo';
+    background-color: #000;
+    color: #ed1414;
+  } */
+}
+
+
+body {
+  background: #505352;
+}
+
+
+.pagination {
+	/* float: right; */
+	margin: 0 0 5px;
+}
+.pagination li a {
+	border: none;
+	font-size: 13px;
+	min-width: 30px;
+	min-height: 30px;
+	color: #999;
+	margin: 0 2px;
+	line-height: 30px;
+	border-radius: 2px !important;
+	text-align: center;
+	padding: 0 6px;
+  font-family: 'Varela Round', sans-serif;
+	font-size: 16px;
+}
+.pagination li a:hover {
+	background: #666;
+  color: #fff
+}
+.pagination li.active a, .pagination li.active a.page-link {
+	background: #03A9F4;
+}
+.pagination li.active a:hover {
+	background: #0397d6;
+}
+.pagination li.disabled i {
+	color: #ccc;
+}
+.pagination li i {
+	font-size: 16px;
+	padding-top: 6px
+}
+.hint-text {
+	/* float: left; */
+	margin-top: 10px;
+	font-size: 13px;
+}
+
+
+/* Post View*/
+.accordion {
+	margin-bottom: 10px;
+  width: 100%;
+}
+.accordion .card {
+	border-radius: 0;
+	border-width: 1px 0 1px 0;
+}
+.accordion .card:first-child {
+	border-top: none;
+}
+.accordion .card .card-header {
+	background: #505352;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-radius: 0;
+	margin-bottom: -2px;
+	font-family: "Roboto", sans-serif;
+
+}
+.accordion .card-header:hover {
+	background: #23384e;
+}
+.accordion .card-header h2 span {
+	float: left;
+	margin-top: 10px;
+}
+.accordion .card-header .btn {
+	font-size: 1.04rem;
+	font-weight: 500;
+	width: 100%;
+	text-align: left;
+	position: relative;
+	top: -2px;
+}
+.accordion .card-header i {
+	float: right;
+	font-size: 1.3rem;
+	font-weight: bold;
+	position: relative;
+	top: 5px;
+}
+.accordion .card-header button:hover {
+	color: #23384e;
+}
+.accordion .card-body {
+	background: #eaeaea;
+	color: #595959;
+}
+.accordion .highlight {
+	color: #fff;
+	background: #202d3c !important;
+}
+
+.accordion .card-header h2 a{
+  text-decoration: none;
+}
+
+.btn-link {
+  color: #fff;
+}
+
+.btn-link:hover {
+  color: #fff;
+}
+
+
+/* Btn edit and remove post */
+.btn-editpost{
+  visibility: hidden;
+  /* position:fixed; */
+  /* top:.65rem; */
+  /* right:.65rem; */
+  margin-top:.65rem;
+  margin-right:.65rem;
+  float: right;
+  /* padding */
+  z-index:10;
+  display:block;
+  padding:.25rem .5rem;
+  font-size:85%;
+  color:#007bff;
+  background-color:#fff;
+  border:1px solid;
+  border-radius:.25rem;
+}
+
+.btn-editpost:hover,.btn-editpost:focus{
+  color:#fff;
+  background-color:#007bff;
+  text-decoration: none;
+}
+
+.btn-rmpost{
+  visibility: hidden;
+  /* position:fixed; */
+  /* top:.65rem; */
+  /* right:.65rem; */
+  margin-top:.65rem;
+  margin-right:.65rem;
+  float: right;
+  /* padding */
+  z-index:10;
+  display:block;
+  padding:.25rem .5rem;
+  font-size:85%;
+  color:#fb4908;
+  background-color:#fff;
+  border:1px solid;
+  border-radius:.25rem;
+}
+
+.btn-rmpost:hover,.btn-rmpost:focus{
+  color:#fff;
+  background-color:#fb4908;
+  text-decoration: none;
+}
+
+.post-changelog:hover .btn-editpost, .post-changelog:hover .btn-rmpost {
+
+    visibility: visible;
+
+}
+
+
+
+/* Custom Modal delete */
+.modal-confirm {
+	color: #636363;
+	width: 400px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}
+.modal-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
+/* #modalspanDelete {
+  font-size: 30;
+  font-weight: bold;
+} */
+.mymodal-header {
+  color: #fff;
+  background: #0069D9;
+}
+
+.myclose {
+  color: #fff;
+}

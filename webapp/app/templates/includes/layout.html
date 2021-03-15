@@ -25,9 +25,17 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    {% if url_prefix is defined %}
 
-    <link href="{{ url_prefix }}/static/css/navbar.css" rel="stylesheet">
+      {% if url_prefix != '/admin' %}
 
+        <link href="{{ url_prefix }}/static/css/navbar.css" rel="stylesheet">
+      {%else%}
+        <link href="/static/{{ url_prefix }}/css/navbar.css" rel="stylesheet">
+      {%endif%}
+    {%else%}
+      <link href="/static/css/navbar.css" rel="stylesheet">
+    {% endif %}
 
     {% if url_prefix is defined %}
       {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' ignore missing %}

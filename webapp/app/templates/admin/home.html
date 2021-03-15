@@ -1,0 +1,181 @@
+
+{% extends 'includes/layout.html' %}
+
+{% block title %}
+  {{pgname}} - {{company}}
+{% endblock %}
+
+
+{% block body %}
+
+<main class="container">
+  <div class="bg-light p-5 rounded">
+    <h1>ADMIN Changelog</h1>
+    <p class="lead">Здесь будут посты об изменениях на сайте</p>
+    <a class="btn btn-lg btn-primary btn-create-post" href="" role="button" data-toggle="modal" data-target="#modalCreatePost" data-action="create">Новый пост</a>
+  </div>
+  <br>
+
+
+  <div class="bg-light p-5 rounded">
+
+    <!-- BEGIN Posts list -->
+    <div class="row">
+      <div class="accordion" id="accordionExample">
+
+      {% for post in pages.items %}
+        <div class="card">
+          <div class="card-header" id="post{{post.id}}">
+            <h2 class="clearfix mb-0">
+              <a
+                class="btn btn-link {% if not loop.index == 1 %}collapsed{% endif %}"
+                data-toggle="collapse"
+                data-target="#collapse_{{loop.index}}"
+                aria-expanded="{% if loop.index == 1 %}true{% else %}false{%endif%}"
+                aria-controls="collapse_{{loop.index}}">
+
+                <div class="d-flex flex-post-title">
+                  <div class="mr-auto">{{ post.title }} </div>
+                  <div class="mr-3">{{post.created}}</div>
+
+                  <div class="post-toogle-icon">
+                    <i class="material-icons">add</i>
+
+                  </div>
+                </div>
+              </a>
+            </h2>
+
+          </div>
+
+          <div
+            id="collapse_{{loop.index}}"
+            class="collapse {% if loop.index == 1 %}show{% endif %}"
+            aria-labelledby="post{{post.id}}"
+            data-parent="#accordionExample"
+          >
+            <div class="post-changelog">
+              <div class="bd-editpost">
+                <a
+                  aria-labeled="edit"
+                  class="btn-editpost"
+                  data-slug="{{ url_for('admin.post_edit', slug=post.slug) }}"
+                  data-toggle="modal"
+                  href="#"
+                  >
+                  Редактировать
+                </a>
+                <a
+                  aria-labeled="edit"
+                  class="btn-rmpost"
+                  data-slug="{{ url_for('admin.post_remove', slug=post.slug) }}"
+                  data-title="{{post.title}}"
+                  data-pk="{{post.id}}"
+                  data-toggle="modal"
+                  href="#"
+                  >
+                  Удалить
+                </a>
+
+              </div>
+              <div class="card-body">
+                <br>
+
+                {{ post.body|safe  }}
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      </div>
+    </div>
+  <!-- END Posts list -->
+
+
+    <!-- НАЧАЛО Разбиение по страницам -->
+    <nav class='d-flex justify-content-between flex-pagination-post'>
+      <div class="hint-text">Showing <b>{{pages.per_page}}</b> out of <b>{{pages.total}}</b> entries</div>
+      <ul class="pagination">
+        <li {% if not pages.has_prev %} class="page-item disabled" {% endif %}>
+          <a class="page-link mypage-prev" href="./?page={{pages.prev_num}}">&laquo</a>
+        </li>
+        {%for page in pages.iter_pages(left_edge=1, left_current=1, right_current=2, right_edge=1) %}
+          <li {% if page == pages.page %} class="page-item active" {% endif %} ><a class="page-link" href="./?page={{page}}">{{page}}</a></li>
+        {% endfor %}
+        <li {% if not pages.has_next %} class="page-item mypage-next disabled"{%else%} class="page-item mypage-next" {% endif %}>
+          <a class="page-link" href="./?page={{pages.next_num}}">&raquo</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- КОНЕЦ Разбиение по страницам -->
+
+  </div>
+</main>
+
+<!-- BEGIN Create post modal -->
+<div class="modal fade" id="modalCreatePost" tabindex="-1" aria-labelledby="modalCreatePostLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <form method="POST" id="modal-form-Post" action="{{url_for('admin.index')}}">
+      <div class="modal-header">
+          <h5 class="modal-title" id="modalCreatePostLabel">Новый пост</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          {% for field in form %}
+          <div class="form-group">
+            {{field.label(class='col-from-label')}}
+            {% if field.name == 'body' %}
+              {{field(class='form-control summernote')}}
+            {% else %}
+              {{field(class='form-control')}}
+            {%endif%}
+          </div>
+          {% endfor %}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="submit" id="btn-modal-post" class="btn btn-success">Создать</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- END Create post modal -->
+
+
+<!-- Delete Modal HTML Global-->
+<div id="modalDeletePost" class="modal fade" date-id="">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>
+				<h4 class="modal-title w-100">Вы уверены?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p >Вы действительно хотите удалить пост?</p>
+        <span id="modalspanDelete" style="font-size: 30; font-weight: bold;"></span>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				<button id="btnDelteYes" type="button" class="btn btn-danger" >Удалить</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- КОНЕЦ Delete Modal HTM -->
+
+
+{% endblock %}
