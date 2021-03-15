@@ -1,0 +1,8 @@
+# enviroment file
+webapp/config/.env
+
+# gitcommands
+.gitcommand
+
+# exclude venv
+venv/*
