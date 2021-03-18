@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+      {% block title %}
+
+      {% endblock %}
+
+    </title>
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500|Open+Sans">
+
+    <!-- googleapis -->
+    <link rel="stylesheet" href="/static/css/googleapis/material_icon.css">
+    <link rel="stylesheet" href="/static/css/googleapis/roboto_varela_round.css">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/static/css/bootstrap/4.6.0/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap/icons/1.4.0/bootstrap-icons.css">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    {% if url_prefix is defined %}
+
+      {% if url_prefix != '/admin1' %}
+
+        <link href="{{ url_prefix }}/static/css/navbar.css" rel="stylesheet">
+      {%else%}
+        <link href="/static/{{ url_prefix }}/css/navbar.css" rel="stylesheet">
+      {%endif%}
+    {%else%}
+    {% if dynamic is defined %}
+      {% include 'includes/_navbar.html'%}
+        <link href="/admin/static/css/navbar.css" rel="stylesheet">
+      {% else %}
+        <link href="/static/css/navbar.css" rel="stylesheet">
+      {% endif %}
+    {% endif %}
+
+    {% if url_prefix is defined %}
+      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' ignore missing %}
+    {% else %}
+      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_css.html' ignore missing %}
+    {% endif %}
+
+    {% if dynamic is defined %}
+      {% include 'includes/dynamic/_dynamic_css.html' ignore missing %}
+    {% endif %}
+
+
+  </head>
+  <body>
+    {% include 'includes/_navbar.html'%}
+    {% block body %}{% endblock %}
+
+    <script src="/static/js/jquery/3.5.1/jquery-3.5.1.min.js" ></script>
+
+    <script src="/static/js/popper/1.16.1/popper.min.js"></script>
+
+    <script src="/static/js/bootstrap/4.6.0/bootstrap.min.js"></script>
+
+    {% if url_prefix is defined %}
+      {% include url_prefix + '/includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' ignore missing %}
+    {% else %}
+      {% include 'includes/' + pgname.lower() +'/_' + pgname.lower() +'_js.html' ignore missing %}
+    {% endif %}
+    {% if dynamic is defined %}
+      {% include 'includes/dynamic/_dynamic_js.html' ignore missing %}
+    {% endif %}
+
+
+  </body>
+</html>

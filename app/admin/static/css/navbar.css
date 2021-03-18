@@ -1,0 +1,122 @@
+/* Show it is fixed to the top */
+nav {
+  font-family: Comic Sans MS, sans-serif;
+}
+
+@media (min-width: 1440px)
+.container {
+    width: 1396px;
+}
+
+.bd-placeholder-img {
+  font-size: 16px;
+  /* font-size: 1.125rem; */
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}s
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
+
+.dropdown-menu > a:hover, .dropdown-menu > a:focus {
+  /* background-color:#198754; */
+  background-color:#0B5ED7;
+  color: #fff;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .mynvabar-btn-dropdown:focus, .mynvabar-btn-dropdown:hover, .mynav-admin-link:focus, .mynav-admin-link:hover {
+  background-color:#0B5ED7;
+  color: #fff;
+  border-radius: 5px 5px 5px 5px;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.img-dropdown {
+  float: right;
+  padding-bottom: 3px;
+}
+
+.mynavbar-theme {
+  background-color: #83878a;
+  /* height: 60px; */
+}
+
+.mynavbar-theme  .navbar-brand, .mynavbar-theme  .nav-link, .mynvabar-btn-dropdown {
+  color: #fff;
+}
+
+.mynavbar-link {
+  /* margin-right: 50px; */
+  width: 78.69px;
+}
+
+/* .mynavbar-theme > li >.open>a {
+  background-color:#0B5ED7;
+} */
+
+.mynavbar-theme .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+}
+
+.mynavbar-theme .icon-bar {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 255%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+}
+
+/* bootstrap5 */
+.mynavbar-theme  .navbar-toggler {
+  color: #fff;
+  border-color: #fff;
+}
+
+/* bootstrap3 */
+.mynavbar-theme  .navbar-toggle {
+  color: #fff;
+  border-color: #fff;
+}
+
+.mynavbar_logo {
+  border-radius: 20px;
+  /* position: absolute;
+  left: 0;
+  vertical-align: middle;
+  padding: 10px 10px; */
+}
+
+.mynavbar-services {
+  /* display: inline; */
+  /* font-size: 30px; */
+  margin-right: 30px;
+}
+
+
+.btn-nav-search-my {
+  color: #0dcaf0;
+  border-color: #0dcaf0;
+  margin-right: .5rem!important;
+}
+
+input.me-2 {
+  margin-right: .5rem!important;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+body {
+  background: #505352;
+}

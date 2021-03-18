@@ -1,0 +1,667 @@
+
+[2021-03-18 02:15:34] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 132, in dyn_edit
+    res = globals()[tb_name].query.filter_by(id == values.id).update(data)
+TypeError: filter_by() takes 1 positional argument but 2 were given
+ 
+
+[2021-03-18 02:17:22] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 132, in dyn_edit
+    res = globals()[tb_name].query.filter_by(globals()[tb_name].id == id).update(data)
+TypeError: filter_by() takes 1 positional argument but 2 were given
+ 
+
+[2021-03-18 02:21:50] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 133, in dyn_edit
+    cprint("PURPLE", "res: " + res)
+TypeError: can only concatenate str (not "int") to str
+ 
+
+[2021-03-18 02:25:09] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 134, in dyn_edit
+    res = globals()[tb_name].query.filter(globals()[tb_name].id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 02:26:30] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 135, in dyn_edit
+    res = globals()[tb_name].query.filter(globals()[tb_name].id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 02:27:58] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 136, in dyn_edit
+    res = globals()[tb_name].query.filter(globals()[tb_name].id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 03:26:42] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 138, in dyn_edit
+    res = globals()[tb_name].query.filter(globals()[tb_name].id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 11:17:23] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '27'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '27'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 137, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '27'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '27'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 11:17:23] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 137, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '15'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 12:32:10] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '30'' at line 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '30'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 137, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE post.id = '30'' at line 1
+[SQL: UPDATE post SET  WHERE post.id = %(id_1)s]
+[parameters: {'id_1': '30'}]
+(Background on this error at: http://sqlalche.me/e/13/f405)
+ 
+
+[2021-03-18 12:48:33] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.DataError: 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 140, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+[SQL: UPDATE post SET title=%(title)s, slug=%(slug)s, body=%(body)s, created=%(created)s WHERE post.id = %(id_1)s]
+[parameters: {'title': 'Version: #0.0.11', 'slug': 'version-0-0-1-1615573751.387908', 'body': '<p>*) добавлена нумерация страниц\r\n</p><p>*) добавлена форма создания поста\r\n</p><p>*) добавлены теги и связь с постами\r\n</p><p>*) добавлен поиск по постам\r\n</p><p>*) изменено представление постов на "гармошку"</p>', 'created': 'Fri, 12 Mar 2021 19:37:25 GMT', 'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/9h9h)
+ 
+
+[2021-03-18 13:42:40] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.DataError: 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 142, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+[SQL: UPDATE post SET title=%(title)s, slug=%(slug)s, body=%(body)s, created=%(created)s WHERE post.id = %(id_1)s]
+[parameters: {'title': 'Version: #0.0.1', 'slug': 'version-0-0-1-1615573751.387908', 'body': '<p>*) добавлена нумерация страниц\r\n</p><p>*) добавлена форма создания поста\r\n</p><p>*) добавлены теги и связь с постами\r\n</p><p>*) добавлен поиск по постам\r\n</p><p>*) изменено представление постов на "гармошку"</p>', 'created': 'Fri, 12 Mar 2021 19:37:25 GMT', 'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/9h9h)
+ 
+
+[2021-03-18 13:52:26] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.DataError: 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 145, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1292 (22007): Incorrect datetime value: 'Fri, 12 Mar 2021 19:37:25 GMT' for column 'created' at row 1
+[SQL: UPDATE post SET title=%(title)s, slug=%(slug)s, body=%(body)s, created=%(created)s WHERE post.id = %(id_1)s]
+[parameters: {'title': 'Version: #0.0.1', 'slug': 'version-0-0-1-1615573751.387908', 'body': '<p>*) добавлена нумерация страниц\r\n</p><p>*) добавлена форма создания поста\r\n</p><p>*) добавлены теги и связь с постами\r\n</p><p>*) добавлен поиск по постам\r\n</p><p>*) изменено представление постов на "гармошку"</p>', 'created': 'Fri, 12 Mar 2021 19:37:25 GMT', 'id_1': '15'}]
+(Background on this error at: http://sqlalche.me/e/13/9h9h)
+ 
+
+[2021-03-18 15:57:52] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Duplicate entry 'version-0-0-1-1615573751.387908' for key 'post.slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.IntegrityError: 1062 (23000): Duplicate entry 'version-0-0-1-1615573751.387908' for key 'post.slug'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 145, in dyn_edit
+    res = Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.IntegrityError: (mysql.connector.errors.IntegrityError) 1062 (23000): Duplicate entry 'version-0-0-1-1615573751.387908' for key 'post.slug'
+[SQL: UPDATE post SET title=%(title)s, slug=%(slug)s, body=%(body)s, created=%(created)s WHERE post.id = %(id_1)s]
+[parameters: {'title': 'Version: #0.0.1', 'slug': 'version-0-0-1-1615573751.387908', 'body': '<p>*) добавлена нумерация страниц\r\n</p><p>*) добавлена форма создания поста\r\n</p><p>*) добавлены теги и связь с постами\r\n</p><p>*) добавлен поиск по постам\r\n</p><p>*) изменено представление постов на "гармошку"</p>', 'created': '2021-03-12T19:37:25', 'id_1': '30'}]
+(Background on this error at: http://sqlalche.me/e/13/gkpj)
+ 
