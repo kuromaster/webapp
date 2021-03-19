@@ -3,35 +3,69 @@ function handlerBtnEditRecord(e) {
   e.stopPropagation();
 
   var url = $(this).data('url');
+  // console.log('step1 url: ' + url);
+  $(".tagremove").remove();
   // var id = $('#modalAddRecord input').attr('id');
 
 
   $.get(url, function (data) {
-    console.log('GET data status: ' + data.status)
+    console.log('GET status: ' + data.status);
+    console.log('GET membership: ' + data.membership);
 
     $('#modalAddRecord h5').text('Редактирование записи');
     $('#modalAddRecord #btn-modal-post').text('Изменить');
     $('#modalAddRecord #btn-modal-post').removeClass("btn-danger").addClass("btn-success");
     $('#modalAddRecord #btn-modal-post').prop('type','button');
 
+    if (data.membership != 'dyn-empty') {
+      var j = 1;
+      // var counter = 0;
+      //
+      // for (var i in data){
+      //   if ( i.indexOf('tag_') >= 0){
+      //     console.log('field: '+ i +'value: ' + data[i]);
+      //   }
+      // }
+      //
+
+      for (var i in data) {
+        if ( i.indexOf('tag_'+j+'_id') >= 0){
+          $('div#'+data.membership).after('\
+          <a class="btn btn-primary btn-sm mb-1 tagremove" id="tag_id'+data[i]+'" data-tag-id='+data[i]+' href="#" style="color: #fff; text-align: center;" role="button">\
+            <span>\
+              '+ data['tag_'+j+'_name'] +'\
+              <button type="button" class="myclose ml-2" data-tag-id='+data[i]+'>\
+                <span aria-hidden="true">&times;</span>\
+              </button>\
+            </span>\
+          </a>\
+          ');
+          j++;
+        }
+      }
+    }
 
     $('#modalAddRecord input.form-control ').each(function(){
       var id = $(this).attr('id');
       $('#modalAddRecord .modal-content #'+id).val(data[id]);
+      // console.log('GET field: ' + id + '; value: ' + data[id]);
 
     });
 
     $('#modalAddRecord .modal-content #body').summernote('code', data.body);
 
     $('#modalAddRecord').modal('show');
+    // console.log('step2 url: ' + url);
 
     $('#btn-modal-post').click(function (event) {
       event.preventDefault();
       event.stopPropagation();
       var data = $('#modal-form-Post').serialize();
+      // console.log('step3 url: ' + url);
 
       $.post(url, data = $('#modal-form-Post').serialize(), function (data) {
-          console.log('POST status from python: ' + data.status);
+          // console.log('step4 url: ' + url);
+          console.log('GET status from python: ' + data.status);
           if (data.status == 'ok'){
             $('#modalAddRecord').modal('hide');
             location.reload();
@@ -56,6 +90,7 @@ function handlerBtnEditRecord(e) {
 
 function handerBtnAddRecord(e) {
   e.preventDefault();
+  $(".tagremove").remove();
 
   $('#modalAddRecord input.form-control ').each(function(){
     var id = $(this).attr('id');
@@ -188,4 +223,36 @@ function itemCheckboxEvent() {
       $("#selectAll").prop("checked", false);
     }
   });
+}
+
+
+function handlerTagRemove(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  console.log('tagremove clicked');
+
+  $(this).remove();
+
+}
+
+function handlerInputTag(e) {
+  // console.log('INPUT membership' + data.membership + ' ');
+  var text = $(this).val();
+  var membership = $(this).attr('id');
+
+  if(e.keyCode == 13)
+    {
+
+      $('div#'+membership).after('\
+      <a class="btn btn-primary btn-sm mb-1 tagremove" href="#" style="color: #fff; text-align: center;" role="button">\
+        <span>\
+          '+ text +'\
+          <button type="button" class="myclose ml-2">\
+            <span aria-hidden="true">&times;</span>\
+          </button>\
+        </span>\
+      </a>\
+      ');
+      $(this).val('');
+    }
 }

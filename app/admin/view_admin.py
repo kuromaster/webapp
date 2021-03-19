@@ -7,7 +7,7 @@ from datetime import datetime
 import json
 from app.admin import admin_panel, menu
 from config.config import Configuration
-from app.admin.models import Post, Tag
+from app.admin.models import Post, Tag, Customer
 from app.color_print import cprint, PrintException
 from app.admin.forms import PostForm
 from app import db
@@ -104,8 +104,8 @@ def tag_detail(slug):
     return render_template('admin/tag_detail.html', pgname="tag_detail", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), posts=posts, tag=tag)
 
 
-@admin_panel.route('/dynamic/<tb_name>/edit/<id>', methods=['POST', 'GET'])
-def dyn_edit(tb_name, id):
+@admin_panel.route('/dynamic/<tb_name>/edit/<id>/<membership>', methods=['POST', 'GET'])
+def dyn_edit(tb_name, id, membership):
     cprint('YELLOW', 'dyn_edit REQUEST METHOD: {}'.format(request.method))
 
     Model = globals()[tb_name.capitalize()]
@@ -114,6 +114,25 @@ def dyn_edit(tb_name, id):
 
     data = {}
     data.clear()
+
+    if membership != 'dyn-empty':
+        tags = getattr(values, membership)
+        data.update({'membership': membership})
+        i = 0
+
+        for tag in tags:
+            cols = type(tag).__table__.columns.keys()
+            i += 1
+
+            for col in cols:
+                cprint("GREEN", "elemnet[{}]: {}, {}".format(i, col, getattr(tag, col)))
+                data.update({'tag_{}_{}'.format(i, col): getattr(tag, col)})
+
+            # for field in tag:
+            #     cprint("BLUE", "elemnet: {}".format(field))
+            #     data.update({'tag_field_' + membership: field})
+    else:
+        data.update({'membership': membership})
 
     if request.method == 'GET':
 
@@ -126,9 +145,8 @@ def dyn_edit(tb_name, id):
     if request.method == 'POST':
 
         for column in columns:
-            if column != 'id':
-                if isinstance(request.form[column], datetime):
-                    cprint("GREEN", "date: {}, date2: {}".format(request.form[column], request.form[column].strftime("%Y-%m-d %H:%M:%S")))
+            if column != 'id' and request.form[column] != '':
+                cprint("GREEN", "elemnet: {}".format(request.form[column]))
                 data.update({column: request.form[column]})
 
         try:

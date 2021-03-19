@@ -1,5 +1,5 @@
 # enviroment file
-webapp/config/.env
+config/.env
 
 # gitcommands
 .gitcommand

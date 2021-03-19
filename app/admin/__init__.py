@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template
 from flask.views import View
-from app.admin.models import Post, Tag
+from app.admin.models import Post, Tag, Customer, tag_membership
 from app.color_print import cprint
 from config.config import Configuration
 
@@ -11,9 +11,10 @@ admin_panel = Blueprint('admin', __name__, template_folder='templates', static_f
 class DynView(View):
     methods = ['GET', 'POST']
 
-    def __init__(self, model, url):
+    def __init__(self, model, url, membership):
         self.model = model
         self.url = url
+        self.membership = membership
         self.pgname = 'Manage ' + self.model.__name__
 
     def dispatch_request(self):
@@ -29,7 +30,22 @@ class DynView(View):
                 cols=cols,
                 tb_name=self.model.__name__.lower(),
                 dynamic=True,
-                menu=menu.get_menu())
+                menu=menu.get_menu(),
+                membership=self.membership)
+
+
+class DynPage(object):
+    def __init__(self, app=None, ):
+        self.app = app
+
+    def add_view(self, model=None, url=None, endpoint=None, membership=None):
+        if url is None:
+            url = model.__name__.lower()
+
+        if endpoint is None:
+            endpoint = 'tb_{}'.format(model.__name__.lower())
+
+        self.app.add_url_rule('/dynamic/' + url, view_func=DynView.as_view(endpoint, model=model, url=url, membership=membership))
 
 
 class DynMenu(object):
@@ -38,27 +54,43 @@ class DynMenu(object):
         self.name = name
         self.menu = {}
 
-    def add_menu(self, label, url):
+    def add_menu(self, label=None, url=None):
         # cprint("YELLOW", "key: {} val: {}".format(label, url))
+        if url is None:
+            url = '/admin/dynamic/{}'.format(label.lower())
         self.menu.update({label: url})
 
     def get_menu(self):
         return self.menu.items()
 
 
-class DynPage(object):
-    def __init__(self, app=None, ):
-        self.app = app
+'''
+        Динамически страницы:
+    Для подключения нужно:
+    1. Создать объект меню:                     menu=DynMenu('menu_name')
+    2. Создать объект страницы:                 dp=DynPage(app)
+    3. Добавить класс в app или Blueprint:      from model import Example
+    3. Добавить класс в виюху:                  from model import Example
+    4. Добавить вьюху(саму страницу):           dp.add_view(url='example', endpoint='tb_example', model=Example)
+        *) полное url - http://app/dynamic/example  от класса DynPage добавляется /dynamic/
+        *) model - класс с помощью которого создается таблица
 
-    def add_view(self, url=None, endpoint=None, model=None):
-        self.app.add_url_rule('/dynamic/' + url, view_func=DynView.as_view(endpoint, model=model, url=url))
+    5. Добавить ссылку в дин. меню:             menu.add_menu(label='Example', url='/admin/dynamic/example')
 
+'''
 
 menu = DynMenu('admin_menu')
 dp = DynPage(admin_panel)
 
-dp.add_view('post', 'tb_post', Post)
-menu.add_menu(Post.__name__, '/admin/dynamic/' + Post.__name__.lower())
+dp.add_view(model=Post, membership='tags')
+# dp.add_view(model=Post)
+menu.add_menu('Post')
 
-dp.add_view('tag', 'tb_tag', Tag)
-menu.add_menu(Tag.__name__, '/admin/dynamic/' + Tag.__name__.lower())
+dp.add_view(Tag)
+menu.add_menu('Tag')
+
+# dp.add_view(tag_membership, 'tag_membership', 'tb_tag_membership')
+# menu.add_menu('tag_membership')
+
+dp.add_view(Customer, 'customer', 'tb_customer')
+menu.add_menu(Customer.__name__, '/admin/dynamic/' + Customer.__name__.lower())

@@ -1,6 +1,11 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-<script src="/admin/static/js/dynamic.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
 
+<script src="/admin/static/js/tags_input/bootstrap-tagsinput.js"></script>
+<script src="/admin/static/js/tags_input/bootstrap-tagsinput-angular.min.js"></script> -->
+
+<script src="/admin/static/js/dynamic.js"></script>
 
 <script>
   $(document).ready(function(){
@@ -22,6 +27,11 @@
     $('.btn-add-record').on("click", handerBtnAddRecord);
     $('.btn-remove-record').on("click", handlerBtnRemoveRecord);
     $('.btn-glbl-remove-record').on("click", handlerBtnGlobalRemoveRecord);
+
+    // tagsinput dynamic created object
+    $(document).on("click", '.tagremove', handlerTagRemove);
+    $(document).on("keyup", 'input#{{membership}}', handlerInputTag)
+
 
   });
 </script>

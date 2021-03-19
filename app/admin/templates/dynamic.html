@@ -51,6 +51,9 @@
                   {% for col in cols %}
                     <th>{{ col }}</th>
                   {% endfor %}
+                  {% if membership is not none %}
+                    <th>{{membership}}</th>
+                  {% endif %}
 
                   <th>Action</th>
                   <!-- <th>Test</th> -->
@@ -72,17 +75,41 @@
                     {% for col in cols %}
                       <td data-pk="{{row.id}}" data-name="{{col}}">{{row[col]}}</td>
                     {% endfor %}
+                    {% if membership is not none %}
+                      <td data-pk="{{row.id}}" data-name="{{membership}}" data-membership="true">
+                        {% for elem in row[membership] %}
+                          <a
+                            class="badge badge-primary"
+                            href="#"
+                            style="color: #fff;"
+                            role="button">
+                              {{elem.name}}
+                          </a>
+                        {% endfor %}
+                      </td>
+                    {% endif %}
 
                     <td data-pk="{{row.id}}" data-name="actioncu">
+                      {% if membership is not none %}
 
                         <a
                           href="#"
                           class="settings btn-editform" title="Редактировать"
                           data-toggle="tooltip"
-                          data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name) }}"
+                          data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership=membership) }}"
                           data-pk="{{row.id}}">
                             <i class="material-icons">&#xE254;</i>
                         </a>
+                      {% else %}
+                        <a
+                          href="#"
+                          class="settings btn-editform" title="Редактировать"
+                          data-toggle="tooltip"
+                          data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership='dyn-empty') }}"
+                          data-pk="{{row.id}}">
+                            <i class="material-icons">&#xE254;</i>
+                        </a>
+                      {% endif %}
 
                         <a
                           href="#"
@@ -109,7 +136,7 @@
 </div>
 <!-- END Динамическая таблица -->
 
-<!-- BEGIN Create post modal -->
+<!-- BEGIN Add record modal -->
 <div class="modal fade" id="modalAddRecord" tabindex="-1" aria-labelledby="modalCreatePostLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -120,30 +147,44 @@
         action="{{url_for('admin.dyn_index', tb_name=tb_name)}}">
 
         <div class="modal-header">
-            <h5 class="modal-title" id="modalCreatePostLabel">Добавить запись</h5>
+          <h5 class="modal-title" id="modalCreatePostLabel">Добавить запись</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
 
-            {% for field in form %}
-            <div class="form-group">
-              {{field.label(class='col-from-label')}}
-              {% if field.name == 'body' %}
-                {{field(class='form-control summernote')}}
-              {% else %}
-                {{field(class='form-control')}}
-              {%endif%}
-            </div>
-            {% endfor %}
+            {% if membership is not none %}
+              <div class="form-group row">
+                <label for="{{membership}}" class="col-sm-2 col-form-label">{{ membership }}</label>
+                <div class="col-sm-10">
+                  <input id="{{membership}}" type="text" class="form-control" placeholder="{{membership}}" name="{{membership}}" >
+                </div>
+              </div>
+              <div class="form-group row">
+
+                <div class="col-sm">
+                  <div id="{{membership}}" style='display: none'></div>
+                  <!-- <a class="btn btn-primary btn-sm mb-1" href="#" style="color: #fff; text-align: center;" role="button">
+                    <span>
+                      test
+                      <button type="button" class="myclose ml-2" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </span>
+                  </a> -->
+
+                </div>
+
+              </div>
+            {% endif %}
 
             {% for col in cols %}
               {% if col != 'id' %}
                 {% if col == 'body' %}
 
                   <div class="form-group row">
-                    <label for="dyn-{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
+                    <label for="{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
                     <div class="col-sm-10">
                       <textarea class="form-control summernote" id="{{col}}" style="display: none;" name="{{col}}"></textarea>
                     </div>

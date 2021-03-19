@@ -29,19 +29,18 @@ class Post(db.Model):
     slug = db.Column(db.String(140), unique=True)
     body = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.now)
+    tags = db.relationship('Tag', secondary=tag_membership, backref=db.backref('posts', lazy='dynamic'))
 
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
         self.generate_slug()
-
-    tags = db.relationship('Tag', secondary=tag_membership, backref=db.backref('posts', lazy='dynamic'))
 
     def generate_slug(self):
         if self.title:
             self.slug = '{}-{}'.format(slugify(self.title), str(datetime.now().timestamp()))
 
     def __repr__(self):
-        return 'id: {}, title: {}'.format(self.id, self.title)
+        return 'id: {}, title: {}, tags: {}\n'.format(self.id, self.title, self.tags)
 
 
 class Tag(db.Model):
@@ -70,7 +69,7 @@ class Customer(db.Model):
     status = db.Column(db.String(100))
     lastMessageId = db.Column(db.Integer)
     lastsenddate = db.Column(db.DateTime)
-    tags = db.Column(db.String(50))
+    # tags = db.Column(db.String(50))
 
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)

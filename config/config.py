@@ -17,4 +17,5 @@ class Configuration(object):
     ERR_PTH = os.getenv("ERR_PTH")
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@localhost:3306/{}'.format(DBUSER, DBPASWD, DBNAME)
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://pythonuser:flaskdefault@localhost:3306/webappdb'
+    # SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@localhost:3306/{}'.format(DBUSER, DBPASWD, DBNAME)
