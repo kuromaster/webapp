@@ -5,6 +5,8 @@ from flask import url_for
 from flask import jsonify
 from datetime import datetime
 import json
+import re
+
 from app.admin import admin_panel, menu
 from config.config import Configuration
 from app.admin.models import Post, Tag, Customer
@@ -109,44 +111,94 @@ def dyn_edit(tb_name, id, membership):
     cprint('YELLOW', 'dyn_edit REQUEST METHOD: {}'.format(request.method))
 
     Model = globals()[tb_name.capitalize()]
+    Model_mmbr = None
     columns = Model.__table__.columns.keys()
     values = Model.query.filter(Model.id == id).first_or_404()
 
     data = {}
     data.clear()
+    data_tag = {}
+    data_tag.clear()
 
     if membership != 'dyn-empty':
         tags = getattr(values, membership)
-        data.update({'membership': membership})
-        i = 0
+        if tags:
+            # cprint("CYAN", "tags: {}".format(type(tags)))
+            data_tag.update({'membership': membership})
+            i = 0
 
-        for tag in tags:
-            cols = type(tag).__table__.columns.keys()
-            i += 1
+            for tag in tags:
+                Model_mmbr = type(tag)
+                cols = type(tag).__table__.columns.keys()
+                i += 1
 
-            for col in cols:
-                cprint("GREEN", "elemnet[{}]: {}, {}".format(i, col, getattr(tag, col)))
-                data.update({'tag_{}_{}'.format(i, col): getattr(tag, col)})
+                for col in cols:
+                    # cprint("GREEN", "elemnet[{}]: {}, {}".format(i, col, getattr(tag, col)))
+                    data_tag.update({'tag_{}_{}'.format(i, col): getattr(tag, col)})
 
-            # for field in tag:
-            #     cprint("BLUE", "elemnet: {}".format(field))
-            #     data.update({'tag_field_' + membership: field})
+                # for field in tag:
+                #     cprint("BLUE", "elemnet: {}".format(field))
+                #     data.update({'tag_field_' + membership: field})
+        else:
+            data_tag.update({'membership': membership})
+            tags = getattr(Model, membership)
+            Model_mmbr = tags.property.mapper.class_
+            # cprint("YELLOW", "search: {}".format(type(tags.property.mapper.class_)))
+            # cprint("YELLOW", "search2: {}".format(type(Model)))
+            # Model.tags.property.mapper.class_
+            # getattr(Model, membership).tags.property.mapper.class_
     else:
-        data.update({'membership': membership})
+        data_tag.update({'membership': membership})
 
     if request.method == 'GET':
 
         for column in columns:
             data.update({column: getattr(values, column)})
 
+        data.update(data_tag)
         data.update({'status': 'ok'})
         return jsonify(data)
 
+    data.clear()
     if request.method == 'POST':
+
+        # cprint("BLUE", "POST data: {}".format(request.values))
+
+        if membership != 'dyn-empty':
+
+            # cprint("RED", "POST membership: {}; Model_mmbr: {};".format(membership, type(Model_mmbr)))
+            # cprint("CYAN", "POST data_tag: {}".format(list(data_tag.values())))
+
+            # add tags to element
+            cprint("CYAN", "POST data [current]: {}".format(request.form[membership]))
+            for tag in re.findall(r"[\w']+", request.form[membership]):
+                if tag in list(data_tag.values()):
+                    cprint("PURPLE", "check [add] tag: {} --- false".format(tag))
+                else:
+                    cprint("GREEN", "check [add] tag: {}, --- True. Will be appended".format(tag))
+
+                    is_tag_exist = Model_mmbr.query.filter(Model_mmbr.name == tag).first()
+                    if is_tag_exist is None:
+                        tag_to_db = Model_mmbr(name=tag)
+                        db.session.add(tag_to_db)
+                        db.session.commit()
+                    getattr(values, membership).append(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
+
+            # remove tag from element
+            for tag in iter(v for k, v in data_tag.items() if 'name' in k):
+                # cprint("BLUE", "POST check remove tag[data_tag]: {}".format(tag))
+                if tag in list(request.form[membership].split(',')):
+                    cprint("PURPLE", "check [delete] tag: {} --- false".format(tag))
+                else:
+                    getattr(values, membership).remove(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
+                    cprint("RED", "check [delete] tag: {} --- True. Will be deleted".format(tag))
+
+            db.session.add(values)
+            db.session.commit()
 
         for column in columns:
             if column != 'id' and request.form[column] != '':
-                cprint("GREEN", "elemnet: {}".format(request.form[column]))
+                cprint("GREEN", "POST elemnet: {}".format(request.form[column]))
                 data.update({column: request.form[column]})
 
         try:
@@ -202,7 +254,7 @@ def dyn_remove(tb_name, id):
     if request.method == 'POST':
 
         try:
-            cprint("RED", "REQ: {}".format(request.form.getlist()))
+            # cprint("RED", "REQ: {}".format(request.form.getlist()))
             db.session.delete(element)
             db.session.commit()
         except Exception as ex:

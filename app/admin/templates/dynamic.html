@@ -1,7 +1,7 @@
 {% extends 'includes/layout.html' %}
 
 {% block title %}
-  {{pgname}} - {{company}}
+{{pgname}} - {{company}}
 {% endblock %}
 
 
@@ -9,130 +9,108 @@
 
 <!-- BEGIN Динамическая таблица -->
 <div class="container-xl">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <h2>Manage <b>{{tb_name.capitalize()}}</b></h2>
-                    </div>
-                    <div class="col-sm-7">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-5">
+            <h2>Manage <b>{{tb_name.capitalize()}}</b></h2>
+          </div>
+          <div class="col-sm-7">
 
-                        <a href="#" class="btn btn-success btn-add-record" onclick="" data-toggle="modal" data-target="#modalAddRecord" data-action="create"><i class="material-icons">&#xE147;</i> <span>Добавить</span></a>
+            <a href="#" class="btn btn-success btn-add-record" onclick="" data-toggle="modal" data-target="#modalAddRecord" data-action="create"><i class="material-icons">&#xE147;</i> <span>Добавить</span></a>
 
-                        <a href="#" onclick=""
-                        class="btn btn-danger btn-glbl-remove-record"
-                        data-target="#modalDeleteRow"
-                        data-url="{{ url_for('admin.dyn_removemrow',  tb_name=tb_name) }}"
-                        data-toggle="modal">
-                          <i class="material-icons">&#xE15C;</i>
-                          <span>Удалить</span>
-                        </a>
+            <a href="#" onclick="" class="btn btn-danger btn-glbl-remove-record" data-target="#modalDeleteRow" data-url="{{ url_for('admin.dyn_removemrow',  tb_name=tb_name) }}" data-toggle="modal">
+              <i class="material-icons">&#xE15C;</i>
+              <span>Удалить</span>
+            </a>
 
 
-                        <!-- <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a> -->
-                    </div>
-                </div>
-            </div>
-            <table id="mytbodycu" class="table table-striped table-hover">
-
-
-
-              <thead>
-
-                <tr>
-                  <th>
-                    <span class="custom-checkbox">
-                      <input type="checkbox" id="selectAll">
-                      <label for="selectAll"></label>
-                    </span>
-                  </th>
-
-                  {% for col in cols %}
-                    <th>{{ col }}</th>
-                  {% endfor %}
-                  {% if membership is not none %}
-                    <th>{{membership}}</th>
-                  {% endif %}
-
-                  <th>Action</th>
-                  <!-- <th>Test</th> -->
-
-                </tr>
-
-              </thead>
-              <tbody>
-
-                {% for row in elements %}
-                <tr>
-                    <td data-pk="{{row.id}}">
-                      <span class="custom-checkbox">
-                        <input type="checkbox" id="checkbox{{row.id}}" data-pk="{{row.id}}" class="checkboxRows" name="" value="">
-                        <label for="checkbox1"></label>
-                      </span>
-                    </td>
-
-                    {% for col in cols %}
-                      <td data-pk="{{row.id}}" data-name="{{col}}">{{row[col]}}</td>
-                    {% endfor %}
-                    {% if membership is not none %}
-                      <td data-pk="{{row.id}}" data-name="{{membership}}" data-membership="true">
-                        {% for elem in row[membership] %}
-                          <a
-                            class="badge badge-primary"
-                            href="#"
-                            style="color: #fff;"
-                            role="button">
-                              {{elem.name}}
-                          </a>
-                        {% endfor %}
-                      </td>
-                    {% endif %}
-
-                    <td data-pk="{{row.id}}" data-name="actioncu">
-                      {% if membership is not none %}
-
-                        <a
-                          href="#"
-                          class="settings btn-editform" title="Редактировать"
-                          data-toggle="tooltip"
-                          data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership=membership) }}"
-                          data-pk="{{row.id}}">
-                            <i class="material-icons">&#xE254;</i>
-                        </a>
-                      {% else %}
-                        <a
-                          href="#"
-                          class="settings btn-editform" title="Редактировать"
-                          data-toggle="tooltip"
-                          data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership='dyn-empty') }}"
-                          data-pk="{{row.id}}">
-                            <i class="material-icons">&#xE254;</i>
-                        </a>
-                      {% endif %}
-
-                        <a
-                          href="#"
-                          class="btn-remove-record"
-                          data-url="{{ url_for('admin.dyn_remove', id=row.id, tb_name=tb_name) }}"
-                          title="Удалить"
-                          data-toggle="tooltip"
-                          data-pk="{{row.id}}">
-                            <i class="material-icons">&#xE872;</i>
-                        </a>
-
-                    </td>
-                    <td>
-
-                    </td>
-
-                </tr>
-                {% endfor %}
-
-              </tbody>
-            </table>
+            <!-- <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a> -->
+          </div>
         </div>
+      </div>
+      <table id="mytbodycu" class="table table-striped table-hover">
+
+
+
+        <thead>
+
+          <tr>
+            <th>
+              <span class="custom-checkbox">
+                <input type="checkbox" id="selectAll">
+                <label for="selectAll"></label>
+              </span>
+            </th>
+
+            {% for col in cols %}
+              <th>{{ col }}</th>
+            {% endfor %}
+
+            {% if membership is not none %}
+              <th>{{membership}}</th>
+            {% endif %}
+
+            <th>Action</th>
+            <!-- <th>Test</th> -->
+
+          </tr>
+
+        </thead>
+        <tbody>
+
+          {% for row in elements %}
+          <tr>
+            <td data-pk="{{row.id}}">
+              <span class="custom-checkbox">
+                <input type="checkbox" id="checkbox{{row.id}}" data-pk="{{row.id}}" class="checkboxRows" name="" value="">
+                <label for="checkbox1"></label>
+              </span>
+            </td>
+
+            {% for col in cols %}
+            <td data-pk="{{row.id}}" data-name="{{col}}">{{row[col]}}</td>
+            {% endfor %}
+
+            {% if membership is not none %}
+              <td data-pk="{{row.id}}" data-name="{{membership}}" data-membership="true">
+                {% for elem in row[membership] %}
+                <a class="badge badge-primary" href="#" style="color: #fff;" role="button">
+                  {{elem.name}}
+                </a>
+                {% endfor %}
+              </td>
+            {% endif %}
+
+            <td data-pk="{{row.id}}" data-name="actioncu">
+              {% if membership is not none %}
+
+              <a href="#" class="settings btn-editform" title="Редактировать" data-toggle="tooltip" data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership=membership) }}" data-pk="{{row.id}}">
+                <i class="material-icons">&#xE254;</i>
+              </a>
+              {% else %}
+              <a href="#" class="settings btn-editform" title="Редактировать" data-toggle="tooltip" data-url="{{ url_for('admin.dyn_edit', id=row.id, tb_name=tb_name, membership='dyn-empty') }}" data-pk="{{row.id}}">
+                <i class="material-icons">&#xE254;</i>
+              </a>
+              {% endif %}
+
+              <a href="#" class="btn-remove-record" data-url="{{ url_for('admin.dyn_remove', id=row.id, tb_name=tb_name) }}" title="Удалить" data-toggle="tooltip" data-pk="{{row.id}}">
+                <i class="material-icons">&#xE872;</i>
+              </a>
+
+            </td>
+            <td>
+
+            </td>
+
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 <!-- END Динамическая таблица -->
 
@@ -141,10 +119,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
 
-      <form
-        method="POST"
-        id="modal-form-Post"
-        action="{{url_for('admin.dyn_index', tb_name=tb_name)}}">
+      <form method="POST" id="modal-form-Post" action="{{url_for('admin.dyn_index', tb_name=tb_name)}}">
 
         <div class="modal-header">
           <h5 class="modal-title" id="modalCreatePostLabel">Добавить запись</h5>
@@ -154,18 +129,18 @@
         </div>
         <div class="modal-body">
 
-            {% if membership is not none %}
-              <div class="form-group row">
-                <label for="{{membership}}" class="col-sm-2 col-form-label">{{ membership }}</label>
-                <div class="col-sm-10">
-                  <input id="{{membership}}" type="text" class="form-control" placeholder="{{membership}}" name="{{membership}}" >
-                </div>
-              </div>
-              <div class="form-group row">
+          {% if membership is not none %}
+          <div class="form-group row">
+            <label for="{{membership}}" class="col-sm-2 col-form-label">{{ membership }}</label>
+            <div class="col-sm-10">
+              <input id="{{membership}}" data-from-tag="" type="text" class="form-control" placeholder="{{membership}}" name="{{membership}}">
+            </div>
+          </div>
+          <div class="form-group row">
 
-                <div class="col-sm">
-                  <div id="{{membership}}" style='display: none'></div>
-                  <!-- <a class="btn btn-primary btn-sm mb-1" href="#" style="color: #fff; text-align: center;" role="button">
+            <div class="col-sm">
+              <div id="{{membership}}" style='display: none'></div>
+              <!-- <a class="btn btn-primary btn-sm mb-1" href="#" style="color: #fff; text-align: center;" role="button">
                     <span>
                       test
                       <button type="button" class="myclose ml-2" data-dismiss="modal">
@@ -174,39 +149,39 @@
                     </span>
                   </a> -->
 
-                </div>
+            </div>
 
-              </div>
-            {% endif %}
+          </div>
+          {% endif %}
 
-            {% for col in cols %}
-              {% if col != 'id' %}
-                {% if col == 'body' %}
+          {% for col in cols %}
+          {% if col != 'id' %}
+          {% if col == 'body' %}
 
-                  <div class="form-group row">
-                    <label for="{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
-                    <div class="col-sm-10">
-                      <textarea class="form-control summernote" id="{{col}}" style="display: none;" name="{{col}}"></textarea>
-                    </div>
-                  </div>
+          <div class="form-group row">
+            <label for="{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
+            <div class="col-sm-10">
+              <textarea class="form-control summernote" id="{{col}}" style="display: none;" name="{{col}}"></textarea>
+            </div>
+          </div>
 
-                {% else %}
+          {% else %}
 
-                  <div class="form-group row">
-                    <label for="{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="{{col}}" placeholder="{{col}}" name="{{col}}">
-                    </div>
-                  </div>
+          <div class="form-group row">
+            <label for="{{col}}" class="col-sm-2 col-form-label">{{ col }}</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="{{col}}" placeholder="{{col}}" name="{{col}}">
+            </div>
+          </div>
 
-                {% endif %}
-              {% endif %}
-            {% endfor %}
+          {% endif %}
+          {% endif %}
+          {% endfor %}
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            <button type="submit" id="btn-modal-post" class="btn btn-success">Создать</button>
+          <button type="submit" id="btn-modal-post" class="btn btn-success">Создать</button>
         </div>
       </form>
 
@@ -217,25 +192,25 @@
 
 <!-- Delete Modal HTML Global-->
 <div id="modalDeleteRow" class="modal fade" date-id="">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header flex-column">
-				<div class="icon-box">
-					<i class="material-icons">&#xE5CD;</i>
-				</div>
-				<h4 class="modal-title w-100">Вы уверены?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p >Вы действительно хотите удалить пост?</p>
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <h4 class="modal-title w-100">Вы уверены?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите удалить пост?</p>
         <span id="modalspanDelete" style="font-size: 30; font-weight: bold;"></span>
-			</div>
-			<div class="modal-footer justify-content-center">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-				<button id="btnDelteYes" type="button" class="btn btn-danger" >Удалить</button>
-			</div>
-		</div>
-	</div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+        <button id="btnDelteYes" type="button" class="btn btn-danger">Удалить</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- КОНЕЦ Delete Modal HTM -->
 

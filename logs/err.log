@@ -1019,3 +1019,158 @@ sqlalchemy.exc.DataError: (mysql.connector.errors.DataError) 1292 (22007): Incor
 [parameters: {'lastname': 'Шибанов', 'name': 'Андрей', 'issuenum': '1', 'phone': '89161245204', 'email': 'greenleprikon@gmail.com', 'deliverydate': 'none', 'message': 'test', 'isEnabled': 'No', 'status': 'ok', 'lastMessageId': '', 'lastsenddate': '', 'id_1': '1'}]
 (Background on this error at: http://sqlalche.me/e/13/9h9h)
  
+
+[2021-03-20 11:34:01] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 406, in _entity_descriptor
+    return getattr(entity, key)
+AttributeError: type object 'Post' has no attribute 'membership'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 153, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1696, in exec_
+    self._do_pre_synchronize()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1769, in _do_pre_synchronize
+    self._additional_evaluators(evaluator_compiler)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1943, in _additional_evaluators
+    values = self._resolved_values_keys_as_propnames
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1862, in _resolved_values_keys_as_propnames
+    for k, v in self._resolved_values:
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1849, in _resolved_values
+    desc = _entity_descriptor(self.mapper, k)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 408, in _entity_descriptor
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.admin.models.Post'>' has no property 'membership'
+ 
+
+[2021-03-20 11:34:47] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 406, in _entity_descriptor
+    return getattr(entity, key)
+AttributeError: type object 'Tag' has no attribute 'membership'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 153, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1696, in exec_
+    self._do_pre_synchronize()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1769, in _do_pre_synchronize
+    self._additional_evaluators(evaluator_compiler)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1943, in _additional_evaluators
+    values = self._resolved_values_keys_as_propnames
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1862, in _resolved_values_keys_as_propnames
+    for k, v in self._resolved_values:
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1849, in _resolved_values
+    desc = _entity_descriptor(self.mapper, k)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/base.py", line 408, in _entity_descriptor
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.admin.models.Tag'>' has no property 'membership'
+ 
+
+[2021-03-20 11:38:38] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 207, in dyn_remove
+    cprint("RED", "REQ: {}".format(request.form.getlist()))
+TypeError: getlist() missing 1 required positional argument: 'key'
+ 
+
+[2021-03-21 03:30:24] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Duplicate entry 'fix-0-0-4-1615755591.05866' for key 'post.slug'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.IntegrityError: 1062 (23000): Duplicate entry 'fix-0-0-4-1615755591.05866' for key 'post.slug'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 206, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.IntegrityError: (mysql.connector.errors.IntegrityError) 1062 (23000): Duplicate entry 'fix-0-0-4-1615755591.05866' for key 'post.slug'
+[SQL: UPDATE post SET title=%(title)s, slug=%(slug)s, body=%(body)s, created=%(created)s WHERE post.id = %(id_1)s]
+[parameters: {'title': 'Fix: #0.0.4', 'slug': 'fix-0-0-4-1615755591.05866', 'body': '<ul><li>исправлено расположение pagination для мобильного вида</li><li>добавлено ограничение на количество ссылок pages на странице</li></ul>', 'created': '2021-03-14 23:59:51', 'id_1': '26'}]
+(Background on this error at: http://sqlalche.me/e/13/gkpj)
+ 
+
+[2021-03-21 03:32:03] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 260, in dyn_remove
+    db.session.commit()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1046, in commit
+    self.transaction.commit()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 504, in commit
+    self._prepare_impl()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
+    self.session.flush()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2540, in flush
+    self._flush(objects)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2682, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
+    compat.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2642, in _flush
+    flush_context.execute()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
+    rec.execute(self)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 538, in execute
+    self.dependency_processor.process_deletes(uow, states)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/dependency.py", line 1104, in process_deletes
+    self._run_crud(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/dependency.py", line 1201, in _run_crud
+    raise exc.StaleDataError(
+sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'tag_membership' expected to delete 2 row(s); Only 3 were matched.
+ 
