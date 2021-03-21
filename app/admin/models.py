@@ -31,7 +31,6 @@ class Post(db.Model):
     created = db.Column(db.DateTime, default=datetime.now)
     tags = db.relationship('Tag', secondary=tag_membership, backref=db.backref('posts', lazy='dynamic'))
 
-
     def __init__(self, *args, **kwargs):
         super(Post, self).__init__(*args, **kwargs)
         self.generate_slug()

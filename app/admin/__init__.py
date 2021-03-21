@@ -23,7 +23,7 @@ class DynView(View):
             elements = self.model.query.order_by(self.model.id.desc()).all()
 
             return render_template(
-                "dynamic.html",
+                "/admin/dynamic.html",
                 pgname=self.pgname,
                 company=Configuration.HTML_TITLE_COMPANY,
                 elements=elements,
