@@ -1,0 +1,13 @@
+{%- with messages = get_flashed_messages(with_categories=true) -%}
+  {% if messages %}
+
+
+    <div class="msg" style=" -moz-animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation: cssAnimation 0s ease-in 3s forwards; -o-animation: cssAnimation 0s ease-in 3s forwards; animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;">
+      {% for category, message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+
+
+  {% endif %}
+{%- endwith %}

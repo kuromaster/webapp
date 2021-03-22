@@ -8,14 +8,13 @@
 
 {% block body %}
 
-
+{% if current_user.is_authenticated %}
 <main class="container">
   <div class="bg-light p-5 rounded">
-    <h1>Changelog</h1>
-    <p class="lead">Здесь будут посты об изменениях на сайте</p>
-    <a class="btn btn-lg btn-primary" href="#" role="button">Новый пост</a>
+    <h1>Dashboard</h1>
+    <p class="lead">Здесь будет dashboard. Когда-нибудь, наверное...</p>
   </div>
 </main>
-
+{% endif %}
 
 {% endblock %}

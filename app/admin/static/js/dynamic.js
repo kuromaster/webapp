@@ -258,10 +258,38 @@ function handlerTagRemove(e) {
 
 function handlerInputTag(e) {
   // console.log('INPUT membership' + data.membership + ' ');
-  var text = $(this).val();
+  var text = $(this).val().trim();
   var membership = $(this).attr("id");
 
   if (e.keyCode == 13 || e.keyCode == 32) {
+    if (text != '') {
+      $("div#" + membership).after(
+        '\
+        <a id="tag_new" class="btn btn-primary btn-sm mb-1 tagremove" href="#" data-tag-text="' +
+          text +
+          '" style="color: #fff; text-align: center;" role="button">\
+          <span>\
+            ' +
+          text +
+          '\
+            <button type="button" class="myclose ml-2">\
+              <span aria-hidden="true">&times;</span>\
+            </button>\
+          </span>\
+        </a>\
+        '
+      );
+      $(this).val("");
+    }
+  }
+}
+
+function handlerBtnAddTag(e) {
+  var membership = $(this).attr("data-membership");
+  var text = $("input#"+membership).val().trim();
+  console.log('btn add tag handler. membership:' + membership);
+
+  if (text != '') {
     $("div#" + membership).after(
       '\
       <a id="tag_new" class="btn btn-primary btn-sm mb-1 tagremove" href="#" data-tag-text="' +
@@ -278,6 +306,6 @@ function handlerInputTag(e) {
       </a>\
       '
     );
-    $(this).val("");
+    $("input#"+membership).val("");
   }
 }

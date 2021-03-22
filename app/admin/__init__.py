@@ -1,11 +1,16 @@
 from flask import Blueprint, request, render_template
+# from flask_security import SQLAlchemyUserDatastore
+from flask_security import login_required
+
 from flask.views import View
-from app.admin.models import Post, Tag, Customer, tag_membership
+from app.admin.models import Post, Tag, Customer, User, Role
 from app.color_print import cprint
 from config.config import Configuration
 
 
 admin_panel = Blueprint('admin', __name__, template_folder='templates', static_folder='static')
+
+# user_datastore = SQLAlchemyUserDatastore(db, User, Group)
 
 
 class DynView(View):
@@ -45,7 +50,7 @@ class DynPage(object):
         if endpoint is None:
             endpoint = 'tb_{}'.format(model.__name__.lower())
 
-        self.app.add_url_rule('/dynamic/' + url, view_func=DynView.as_view(endpoint, model=model, url=url, membership=membership))
+        self.app.add_url_rule('/dynamic/' + url, view_func=login_required(DynView.as_view(endpoint, model=model, url=url, membership=membership)))
 
 
 class DynMenu(object):
@@ -83,14 +88,16 @@ menu = DynMenu('admin_menu')
 dp = DynPage(admin_panel)
 
 dp.add_view(model=Post, membership='tags')
-# dp.add_view(model=Post)
 menu.add_menu('Post')
 
 dp.add_view(Tag)
 menu.add_menu('Tag')
 
-# dp.add_view(tag_membership, 'tag_membership', 'tb_tag_membership')
-# menu.add_menu('tag_membership')
+dp.add_view(model=User, membership='roles')
+menu.add_menu('User')
+
+dp.add_view(Role)
+menu.add_menu('Role')
 
 dp.add_view(Customer, 'customer', 'tb_customer')
 menu.add_menu(Customer.__name__, '/admin/dynamic/' + Customer.__name__.lower())

@@ -15,6 +15,9 @@ class Configuration(object):
     DBPASWD = os.getenv("DBPASWD")
     DBNAME = os.getenv("DBNAME")
     ERR_PTH = os.getenv("ERR_PTH")
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT")
+    SECURITY_PASSWORD_HASH = os.getenv("SECURITY_PASSWORD_HASH")
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://pythonuser:flaskdefault@localhost:3306/webappdb'

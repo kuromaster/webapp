@@ -64,35 +64,39 @@
         </div>
       </li>
 
-        {%if url_prefix == '/admin' or dynamic is defined %}
-          <li class="nav-item">
-            <a class="nav-link ml-1" href="/admin/">ChangeLog</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ml-1 mr-1" href="#" id="navbarDropdownSettings" data-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-tools"></i>
-              Admin
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownSettings">
+        {% if current_user.is_authenticated %}
 
-              {% for lbl, link in menu %}
-              <a class="dropdown-item mynavbar-settings" href="{{link}}">
-                {{lbl}}
-                <!-- <div class="img-dropdown">
-                  <i class="bi bi-person-plus-fill"></i>
-                </div> -->
+          {%if url_prefix == '/admin' or dynamic is defined  and current_user.has_role('admin') %}
+            <li class="nav-item">
+              <a class="nav-link ml-1" href="/admin/">ChangeLog</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle ml-1 mr-1" href="#" id="navbarDropdownSettings" data-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-tools"></i>
+                Admin
               </a>
-              {% endfor %}
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link ml-1 mr-1" href="/debug">Debug</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link ml-1 mr-1" href="/admin/">Admin</a>
-          </li>
+
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownSettings">
+
+                {% for lbl, link in menu %}
+                <a class="dropdown-item mynavbar-settings" href="{{link}}">
+                  {{lbl}}
+                  <!-- <div class="img-dropdown">
+                    <i class="bi bi-person-plus-fill"></i>
+                  </div> -->
+                </a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-1 mr-1" href="/debug">Debug</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link ml-1 mr-1" href="/admin/">Admin</a>
+            </li>
+          {% endif %}
         {% endif %}
 
 
@@ -138,7 +142,7 @@
     </ul>
 
 
-    <form class="d-flex" method="GET">
+    <form class="d-flex nav-search" method="GET">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.args.get('q','') }}">
       <button class="btn btn-outline-info btn-nav-search-my" type="submit">Search</button>
     </form>

@@ -4,8 +4,12 @@ from flask.json import JSONEncoder
 from datetime import date
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
+from flask_security import SQLAlchemyUserDatastore
+from flask_security import Security
+
 
 from config.config import Configuration
+
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -31,14 +35,15 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-# class EndpointAction(object):
-#
-#     def __init__(self, action):
-#         self.action = action
-#         self.response = Response(status=200, headers={})
-#
-#     def __call__(self, *args):
-#         self.action()
-#         return self.response
+from app.admin.models import User, Role
+# from app.color_print import cprint
 
-# PageView('smstable')
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+
+# if security is not None:
+#     for i in dict(security):
+#         cprint("YELLOW", "security: {}".format(i))
+# if user_datastore is not None:
+#     for j in dict(user_datastore):
+#         cprint("BLUE", "user_datastore: {}".format(j))

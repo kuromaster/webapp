@@ -1,0 +1,35 @@
+{% macro render_field_with_errors(field) %}
+  <div class="inputBox">
+    {{ field(**kwargs)|safe }} {{ field.label }}
+    {% if field.errors %}
+      <div class="msg" style=" -moz-animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation: cssAnimation 0s ease-in 3s forwards; -o-animation: cssAnimation 0s ease-in 3s forwards; animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;">
+        {% for error in field.errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_field_with_errors_2(field) %}
+<p>
+  {{ field(**kwargs)|safe }} {{ field.label }}
+  {% if field.errors %}
+    <div class="msg" style=" -moz-animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation: cssAnimation 0s ease-in 3s forwards; -o-animation: cssAnimation 0s ease-in 3s forwards; animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;">
+      {% for error in field.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+</p>
+{% endmacro %}
+
+{% macro render_field(field) %}
+  <p>{{ field(**kwargs)|safe }}</p>
+{% endmacro %}
+
+{% macro render_field_2(field) %}
+  <div class="inputBox">
+    {{ field(**kwargs)|safe }} {{ field.label }}
+  </div>
+{% endmacro %}

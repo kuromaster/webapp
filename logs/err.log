@@ -1174,3 +1174,227 @@ sqlalchemy.exc.IntegrityError: (mysql.connector.errors.IntegrityError) 1062 (230
     raise exc.StaleDataError(
 sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'tag_membership' expected to delete 2 row(s); Only 3 were matched.
  
+
+[2021-03-22 12:39:29] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 507, in cmd_query
+    self._cmysql.query(query,
+_mysql_connector.MySQLInterfaceError: Duplicate entry 'asd@test.ru' for key 'user.email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+mysql.connector.errors.IntegrityError: 1062 (23000): Duplicate entry 'asd@test.ru' for key 'user.email'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 214, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
+    self.dialect.do_execute(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 608, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/cursor_cext.py", line 274, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/mysql/connector/connection_cext.py", line 511, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+sqlalchemy.exc.IntegrityError: (mysql.connector.errors.IntegrityError) 1062 (23000): Duplicate entry 'asd@test.ru' for key 'user.email'
+[SQL: UPDATE user SET login=%(login)s, email=%(email)s, password=%(password)s, created=%(created)s WHERE user.id = %(id_1)s]
+[parameters: {'login': 'asd', 'email': 'asd@test.ru', 'password': 'pbkdf2:sha256:150000$AzEdZHJs$63db997431199164ee02589653222b44d41d0e861777fd7a766c290cde14c1be', 'created': '2021-03-21 18:20:54', 'id_1': '4'}]
+(Background on this error at: http://sqlalche.me/e/13/gkpj)
+ 
+
+[2021-03-22 12:58:09] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+TypeError: Not a boolean value: 'true'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 214, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1206, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+sqlalchemy.exc.StatementError: (builtins.TypeError) Not a boolean value: 'true'
+[SQL: UPDATE user SET login=%(login)s, email=%(email)s, created=%(created)s, active=%(active)s WHERE user.id = %(id_1)s]
+[parameters: [immutabledict({})]]
+ 
+
+[2021-03-22 12:58:43] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+TypeError: Not a boolean value: 'True'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 214, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1206, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+sqlalchemy.exc.StatementError: (builtins.TypeError) Not a boolean value: 'True'
+[SQL: UPDATE user SET login=%(login)s, email=%(email)s, created=%(created)s, active=%(active)s WHERE user.id = %(id_1)s]
+[parameters: [immutabledict({})]]
+ 
+
+[2021-03-22 12:58:57] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+TypeError: Not a boolean value: '1'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/admin/view_admin.py", line 214, in dyn_edit
+    Model.query.filter(Model.id == id).update(data)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 4063, in update
+    update_op.exec_()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1697, in exec_
+    self._do_exec()
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1895, in _do_exec
+    self._execute_stmt(update_stmt)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 1702, in _execute_stmt
+    self.result = self.query._execute_crud(stmt, self.mapper)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 3568, in _execute_crud
+    return conn.execute(stmt, self._params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
+    return meth(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1206, in _execute_context
+    self._handle_dbapi_exception(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
+    util.raise_(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
+    raise exception
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1204, in _execute_context
+    context = constructor(dialect, self, conn, *args)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 873, in _init_compiled
+    param = dict(
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 876, in <genexpr>
+    processors[key](compiled_params[key])
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1841, in process
+    value = _strict_as_bool(value)
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/sqlalchemy/sql/sqltypes.py", line 1816, in _strict_as_bool
+    raise TypeError("Not a boolean value: %r" % value)
+sqlalchemy.exc.StatementError: (builtins.TypeError) Not a boolean value: '1'
+[SQL: UPDATE user SET login=%(login)s, email=%(email)s, created=%(created)s, active=%(active)s WHERE user.id = %(id_1)s]
+[parameters: [immutabledict({})]]
+ 

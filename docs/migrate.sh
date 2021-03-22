@@ -7,3 +7,10 @@ python manage.py db migrate
 
 # в помощь миграции - обновление таблицы и полей
 python manage.py db upgrade
+
+# ERROR
+# python manage.py db migrate
+# ERROR [flask_migrate] Error: Target database is not up to date.
+python manage.py db stamp head
+python manage.py db migrate
+python manage.py db upgrade

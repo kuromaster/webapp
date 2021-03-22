@@ -28,10 +28,10 @@ if [ ! -z $1 ] ; then
     git commit -m "${2}"
     _echo yellow "[INFO] Git checkout: $1"
     git checkout -b ${1}
-    _echo green "[INFO] Git push"
-    git push origin ${1}
     _echo yellow "[INFO] Git merge $1 to latest"
     git merge ${1} latest
+    _echo green "[INFO] Git push"
+    git push origin ${1}
   else
     _echo red "[ERROR] arg2 not set. Commit comment empty."
   fi

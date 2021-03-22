@@ -1,0 +1,189 @@
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script type="text/javascript">
+
+  var $jQuery_3_5_1 = $.noConflict(true);
+
+  $jQuery_3_5_1(document).ready(function() {
+    $jQuery_3_5_1(function() {
+      $jQuery_3_5_1('a#syncBtn').on('click', function(e) {
+        e.preventDefault()
+        console.log('sync started');
+        $jQuery_3_5_1.getJSON('/syncdatafromjira',
+            function(data) {
+          //do nothing
+        })
+        .done(function() {
+          // $(".mydeliverysmstb").load(location.href + " .mydeliverysmstb");
+          location.reload(true);
+          console.log('success');
+        });
+        return false;
+      });
+    });
+
+
+    // var dataTable = $('.mydeliverysmstb').DataTable();
+    $jQuery_3_5_1('.mydeliverysmstb').DataTable({
+      "searching": true,
+      "paging": true,
+      "pageLength": 50,
+      "info": true,
+      "scrollX": true,
+      scrollCollapse: true,
+      "dom": "<'row'<'col-sm-6'B><'col-sm-6'f>>" +
+        "<'row'<'col-sm-12'rt>>" +
+        "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'p>>"
+
+    })
+
+    console.log("$jQuery_3_5_1");
+  });
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+
+<script type="text/javascript">
+
+  var $jQuery_2_2_0 = $.noConflict(true);
+
+  $jQuery_2_2_0(document).ready(function() {
+
+
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        mode: 'popup',
+        container:'body',
+        selector:'td.deliverydate',
+        url:'/updatesmsdelivery',
+        title:'DeliveryDate',
+        type:'POST',
+
+        validate: function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        },
+        type: 'datetime',
+        format : 'yyyy-mm-dd 12:00:00',
+        viewformat : 'yyyy-mm-dd 12:00:00',
+        inputclass : "datepick",
+
+        placement: 'top',
+        emptytext: '...',
+        datetimepicker : {
+          weekStart : 1
+        }
+    });
+
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        container:'body',
+        selector:'td.lastname',
+        url:'/updatesmsdelivery',
+        title:'LastName',
+        type:'POST',
+        validate:function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        container:'body',
+        selector:'td.name',
+        url:'/updatesmsdelivery',
+        title:'Name',
+        type:'POST',
+        validate:function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        container:'body',
+        selector:'td.email',
+        url:'/updatesmsdelivery',
+        title:'Email',
+        type:'POST',
+        validate:function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+
+
+
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        // mode: 'inline',
+        container:'body',
+        selector:'td.message',
+        url:'/updatesmsdelivery',
+        title:'Message',
+        rows: 10,
+        type:'POST',
+        validate:function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+
+
+
+    $jQuery_2_2_0('.mydeliverysmstb').editable({
+        // mode: 'inline',
+        container:'body',
+        selector:'td.isEnabled',
+        url:'/updatesmsdelivery',
+        title:'isEnabled',
+        type:'POST',
+        value: 'empty',
+        source: [
+          {value: 'empty', text: ''},
+          {value: 'No', text: 'No'},
+          {value: 'Yes', text: 'Yes'}
+
+        ],
+        validate:function(value){
+            if($jQuery_2_2_0.trim(value) == '')
+            {
+                return 'This field is required';
+            }
+        }
+    });
+
+
+    console.log("$jQuery_2_2_0");
+  });
+
+
+  // var table = $('.mydeliverysmstb').DataTable();
+
+//   $('.mydeliverysmstb thead th').each( function () {
+//     var title = $(this).text();
+//     $(this).html('<input type="text" placeholder="Search '+title+'" />');
+//   });
+//
+//   table.columns().every( function () {
+//     var that = this;
+//     $('input', this.header() ).on('keyup change', function () {
+//       if (that.search() !== this.value ){
+//         that.search( this.value ).draw();
+//       }
+//     });
+//   });
+</script>

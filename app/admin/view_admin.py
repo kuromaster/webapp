@@ -3,13 +3,15 @@ from flask import request
 from flask import redirect
 from flask import url_for
 from flask import jsonify
-from datetime import datetime
-import json
+from werkzeug.security import generate_password_hash
+from flask_security import login_required, roles_required, current_user
+# from datetime import datetime
+# import json
 import re
 
 from app.admin import admin_panel, menu
 from config.config import Configuration
-from app.admin.models import Post, Tag, Customer
+from app.admin.models import Post, Tag, Customer, User, Role
 from app.color_print import cprint, PrintException
 from app.admin.forms import PostForm
 from app import db
@@ -18,7 +20,15 @@ from app import db
 err_pth = Configuration.ERR_PTH
 
 
+'''
+    [Блок - ChangeLog]
+'''
+
+
+# NOTE: Домашняя страницы админки. Она же ChangeLog
 @admin_panel.route('/', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def index():
 
     if request.method == 'POST':
@@ -50,10 +60,13 @@ def index():
 
     pages = posts.paginate(page=page, per_page=7)
 
-    return render_template("admin/home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), form=form, pages=pages, menu=menu.get_menu())
+    return render_template("admin/home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), form=form, pages=pages, menu=menu.get_menu(), User="{} {}".format(current_user.lastname, current_user.name))
 
 
+# NOTE: Переход к посту по ссылке (работает через строку, управление не реальзовано)
 @admin_panel.route('/post/<slug>')
+@login_required
+@roles_required('admin', 'user')
 def post_detail(slug):
     cprint("YELLOW", "slug: |{}|".format(slug))
     post = Post.query.filter(Post.slug == slug).first_or_404()
@@ -61,7 +74,10 @@ def post_detail(slug):
     return render_template('admin/post_detail.html', pgname="post_detail", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), post=post, tags=tags)
 
 
+# NOTE: Ссылка редактирования поста
 @admin_panel.route('/post/<slug>/edit', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def post_edit(slug):
     cprint('YELLOW', 'REQUEST METHOD: {}'.format(request.method))
     post = Post.query.filter(Post.slug == slug).first_or_404()
@@ -80,7 +96,10 @@ def post_edit(slug):
         return jsonify({'status': 'ok'})
 
 
+# NOTE: Удаление поста через ссылку
 @admin_panel.route('/post/<slug>/rm', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def post_remove(slug):
     cprint('YELLOW', 'REQUEST METHOD: {}'.format(request.method))
     post = Post.query.filter(Post.slug == slug).first_or_404()
@@ -99,14 +118,29 @@ def post_remove(slug):
         return jsonify({'status': 'ok'})
 
 
-@admin_panel.route('/tag/<slug>')
-def tag_detail(slug):
-    tag = Tag.query.filter(Tag.slug == slug).first_or_404()
-    posts = tag.posts.all()
-    return render_template('admin/tag_detail.html', pgname="tag_detail", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), posts=posts, tag=tag)
+# NOTE: Страница отображения постов связанных с slug тега
+# @admin_panel.route('/tag/<slug>')
+# @login_required
+# @roles_required('admin', 'user')
+# def tag_detail(slug):
+#     tag = Tag.query.filter(Tag.slug == slug).first_or_404()
+#     posts = tag.posts.all()
+#     return render_template('admin/tag_detail.html', pgname="tag_detail", company=Configuration.HTML_TITLE_COMPANY, url_prefix='/{}'.format(admin_panel.name), posts=posts, tag=tag)
 
 
+'''
+    [Блок - Динамические страницы.]
+    Страницы содержат таблицы БД с возможностью управления:
+        - создание
+        - удаление
+        - редактирование
+'''
+
+
+# NOTE: Динамические страницы. Редактирование
 @admin_panel.route('/dynamic/<tb_name>/edit/<id>/<membership>', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def dyn_edit(tb_name, id, membership):
     cprint('YELLOW', 'dyn_edit REQUEST METHOD: {}'.format(request.method))
 
@@ -171,35 +205,50 @@ def dyn_edit(tb_name, id, membership):
 
             # add tags to element
             cprint("CYAN", "POST data [current]: {}".format(request.form[membership]))
-            for tag in re.findall(r"[\w']+", request.form[membership]):
-                if tag in list(data_tag.values()):
-                    cprint("PURPLE", "check [add] tag: {} --- false".format(tag))
-                else:
-                    cprint("GREEN", "check [add] tag: {}, --- True. Will be appended".format(tag))
+            if request.form[membership]:
+                for tag in re.findall(r"[\w']+", request.form[membership]):
+                    if tag in list(data_tag.values()):
+                        cprint("PURPLE", "check [add] tag: {} --- false".format(tag))
+                    else:
+                        cprint("GREEN", "check [add] tag: {}, --- True. Will be appended".format(tag))
 
-                    is_tag_exist = Model_mmbr.query.filter(Model_mmbr.name == tag).first()
-                    if is_tag_exist is None:
-                        tag_to_db = Model_mmbr(name=tag)
-                        db.session.add(tag_to_db)
-                        db.session.commit()
-                    getattr(values, membership).append(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
+                        is_tag_exist = Model_mmbr.query.filter(Model_mmbr.name == tag).first()
+                        if is_tag_exist is None:
+                            tag_to_db = Model_mmbr(name=tag)
+                            db.session.add(tag_to_db)
+                            db.session.commit()
+                        getattr(values, membership).append(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
 
-            # remove tag from element
-            for tag in iter(v for k, v in data_tag.items() if 'name' in k):
-                # cprint("BLUE", "POST check remove tag[data_tag]: {}".format(tag))
-                if tag in list(request.form[membership].split(',')):
-                    cprint("PURPLE", "check [delete] tag: {} --- false".format(tag))
-                else:
-                    getattr(values, membership).remove(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
-                    cprint("RED", "check [delete] tag: {} --- True. Will be deleted".format(tag))
+                # remove tag from element
+                for tag in iter(v for k, v in data_tag.items() if 'name' in k):
+                    # cprint("BLUE", "POST check remove tag[data_tag]: {}".format(tag))
+                    if tag in list(request.form[membership].split(',')):
+                        cprint("PURPLE", "check [delete] tag: {} --- false".format(tag))
+                    else:
+                        getattr(values, membership).remove(Model_mmbr.query.filter(Model_mmbr.name == tag).first())
+                        cprint("RED", "check [delete] tag: {} --- True. Will be deleted".format(tag))
 
-            db.session.add(values)
-            db.session.commit()
+                db.session.add(values)
+                db.session.commit()
 
         for column in columns:
             if column != 'id' and request.form[column] != '':
-                cprint("GREEN", "POST elemnet: {}".format(request.form[column]))
-                data.update({column: request.form[column]})
+                if column == 'passsword' and Model == User:
+                    cprint("BLUE", "column: {} password: {}".format(column, str(request.form[column])))
+                    if 'pbkdf2:sha256' not in str(request.form[column]):
+                        # cprint("BLUE", "column: {} pkey: {}".format(column, request.form[column]))
+                        pvalue = generate_password_hash(str(request.form[column]))
+                        data.update({column: pvalue})
+                elif column == 'active' and Model == User:
+                    # cprint("BLUE", "active is: {}".format(str(request.form[column])))
+                    if str(request.form[column]).capitalize() == 'True':
+                        data.update({column: True})
+                    else:
+                        data.update({column: False})
+
+                else:
+                    cprint("GREEN", "POST elemnet: {}".format(request.form[column]))
+                    data.update({column: request.form[column]})
 
         try:
             Model.query.filter(Model.id == id).update(data)
@@ -212,7 +261,10 @@ def dyn_edit(tb_name, id, membership):
         return jsonify({'status': 'ok'})
 
 
+# NOTE: Динамические страницы. Создание записи в таблице
 @admin_panel.route('/dynamic/<tb_name>/create', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def dyn_index(tb_name):
     Model = globals()[tb_name.capitalize()]
     cprint('YELLOW', 'dyn_index REQUEST METHOD: {}'.format(request.method))
@@ -241,7 +293,10 @@ def dyn_index(tb_name):
     return jsonify({'status': 'ok'})
 
 
+# NOTE: Динамические страницы. Удаление строки
 @admin_panel.route('/dynamic/<tb_name>/rm/<id>', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def dyn_remove(tb_name, id):
 
     Model = globals()[tb_name.capitalize()]
@@ -264,7 +319,10 @@ def dyn_remove(tb_name, id):
         return jsonify({'status': 'ok'})
 
 
+# NOTE: Динамические страницы. Удаление строк
 @admin_panel.route('/dynamic/<tb_name>/removemultirow', methods=['POST', 'GET'])
+@login_required
+@roles_required('admin', 'user')
 def dyn_removemrow(tb_name):
 
     Model = globals()[tb_name.capitalize()]

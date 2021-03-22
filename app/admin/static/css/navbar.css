@@ -3,9 +3,14 @@ nav {
   font-family: Comic Sans MS, sans-serif;
 }
 
-@media (min-width: 1440px)
-.container {
-    width: 1396px;
+@media (min-width: 1440px){
+  .container {
+      width: 1396px;
+  }
+}
+
+form.d-flex.nav-search {
+  flex-direction: row;
 }
 
 .bd-placeholder-img {
