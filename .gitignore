@@ -6,3 +6,6 @@ config/.env
 
 # exclude venv
 venv/*
+
+#exclude scripts
+scripts/*

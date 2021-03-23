@@ -84,11 +84,12 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255))  # Password
     created = db.Column(db.DateTime, default=datetime.now)
     active = db.Column(db.Boolean(), default=True)
-    last_login_at = db.Column(db.DateTime)
-    current_login_at = db.Column(db.DateTime)
+    last_activity = db.Column(db.DateTime)
     login_count = db.Column(db.Integer)
-    last_login_ip = db.Column(db.String(100))
+    current_login_at = db.Column(db.DateTime)
+    last_login_at = db.Column(db.DateTime)
     current_login_ip = db.Column(db.String(100))
+    last_login_ip = db.Column(db.String(100))
     picture_url = db.Column(db.String(255))
     roles = db.relationship('Role', secondary=role_membership, backref=db.backref('users', lazy='dynamic'))
 

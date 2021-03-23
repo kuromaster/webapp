@@ -39,7 +39,7 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-from app.admin.models import User, Role
+from app.admin.models import *
 # from app.color_print import cprint
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

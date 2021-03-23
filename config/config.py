@@ -27,3 +27,5 @@ class Configuration(object):
 
     GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
     GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+
+    WORK_DIR = "/root/flask/v3/webapp"
