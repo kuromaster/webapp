@@ -89,6 +89,7 @@ class User(db.Model, UserMixin):
     login_count = db.Column(db.Integer)
     last_login_ip = db.Column(db.String(100))
     current_login_ip = db.Column(db.String(100))
+    picture_url = db.Column(db.String(255))
     roles = db.relationship('Role', secondary=role_membership, backref=db.backref('users', lazy='dynamic'))
 
     def __init__(self, *args, **kwargs):

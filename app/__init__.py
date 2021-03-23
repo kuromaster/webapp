@@ -1,4 +1,5 @@
 from flask import Flask
+
 from flask_sqlalchemy import SQLAlchemy
 from flask.json import JSONEncoder
 from datetime import date
@@ -7,9 +8,12 @@ from flask_script import Manager
 from flask_security import SQLAlchemyUserDatastore
 from flask_security import Security
 
+# from flask import render_template, session, redirect, url_for
+
+from authlib.integrations.flask_client import OAuth
+
 
 from config.config import Configuration
-
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -41,9 +45,16 @@ from app.admin.models import User, Role
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
-# if security is not None:
-#     for i in dict(security):
-#         cprint("YELLOW", "security: {}".format(i))
-# if user_datastore is not None:
-#     for j in dict(user_datastore):
-#         cprint("BLUE", "user_datastore: {}".format(j))
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id=app.config["GOOGLE_CLIENT_ID"],
+    client_secret=app.config["GOOGLE_CLIENT_SECRET"],
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
+    client_kwargs={'scope': 'openid email profile'},
+)

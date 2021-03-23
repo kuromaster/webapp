@@ -14,7 +14,9 @@ class Configuration(object):
     DBUSER = os.getenv("DBUSER")
     DBPASWD = os.getenv("DBPASWD")
     DBNAME = os.getenv("DBNAME")
+
     ERR_PTH = os.getenv("ERR_PTH")
+
     SECRET_KEY = os.getenv("SECRET_KEY")
     SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT")
     SECURITY_PASSWORD_HASH = os.getenv("SECURITY_PASSWORD_HASH")
@@ -22,3 +24,6 @@ class Configuration(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://pythonuser:flaskdefault@localhost:3306/webappdb'
     # SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@localhost:3306/{}'.format(DBUSER, DBPASWD, DBNAME)
+
+    GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+    GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')

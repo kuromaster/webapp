@@ -49,7 +49,11 @@
                       </span>
                     </th>
 
-                    <th>Action</th>
+                    <th>action</th>
+
+                    {% if membership is not none %}
+                      <th>{{membership}}</th>
+                    {% endif %}
 
                     {% for col in cols %}
                       {% if col != 'password' %}
@@ -57,9 +61,7 @@
                       {% endif %}
                     {% endfor %}
 
-                    {% if membership is not none %}
-                      <th>{{membership}}</th>
-                    {% endif %}
+
 
 
                     <!-- <th>Test</th> -->
@@ -96,12 +98,6 @@
 
                     </td>
 
-                    {% for col in cols %}
-                      {% if col != 'password' %}
-                        <td data-pk="{{row.id}}" data-name="{{col}}">{{row[col]}}</td>
-                      {% endif %}
-                    {% endfor %}
-
                     {% if membership is not none %}
                       <td data-pk="{{row.id}}" data-name="{{membership}}" data-membership="true">
                         {% for elem in row[membership] %}
@@ -111,6 +107,14 @@
                         {% endfor %}
                       </td>
                     {% endif %}
+
+                    {% for col in cols %}
+                      {% if col != 'password' %}
+                        <td data-pk="{{row.id}}" data-name="{{col}}">{{row[col]}}</td>
+                      {% endif %}
+                    {% endfor %}
+
+
 
 
 

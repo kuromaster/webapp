@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/bootstrap/4.6.0/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/static/css/login.css">
   <title>Login</title>
 </head>
@@ -23,7 +24,7 @@
     {{ render_field(login_user_form.next) }}
     {{ render_field(login_user_form.submit) }}
     <p>
-      <a class="google-auth-submit" type="button" name="google-auth" href="#">
+      <a class="google-auth-submit" type="button" name="google-auth" href="{{url_for('google_login')}}">
         <span class="google-container">
           <img src="static/img/login_user/google.svg" alt="" style="height: 18px; margin-right: 8px; width: 18px;">
           <span>Войти с помощью Google</span>
