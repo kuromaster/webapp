@@ -1,0 +1,24 @@
+
+{% extends 'includes/layout.html' %}
+
+{% block title %}
+  {{pgname}} - {{company}}
+{% endblock %}
+
+
+{% block body %}
+
+{% if current_user.is_authenticated %}
+{% include "security/_messages.html" %}
+  <main class="container">
+    <div class="bg-light p-5 rounded txtblock">
+      <h1>Шаблон</h1>
+
+      <!-- <button type="submit" class="btn btn-primary btn-sm editable-submit"><i class="bi bi-check" aria-hidden="true"></i></button> -->
+    </div>
+
+
+
+  </main>
+{% endif %}
+{% endblock %}

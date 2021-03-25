@@ -1,0 +1,75 @@
+
+{% extends 'includes/layout.html' %}
+
+{% block title %}
+  {{pgname}} - {{company}}
+{% endblock %}
+
+
+{% block body %}
+
+{% if current_user.is_authenticated %}
+{% include "security/_messages.html" %}
+  <main class="container-fluid">
+    <div class="bg-light p-5 rounded txtblock">
+      <h1>gSpreadSheet</h1>
+
+      <!-- <button type="submit" class="btn btn-primary btn-sm editable-submit"><i class="bi bi-check" aria-hidden="true"></i></button> -->
+    </div>
+    <div>
+      <h1>TEST</h1>
+
+      <table class="table table-striped table-hover">
+        {% set glob = {} %}
+        {% for row in debug %}
+
+          {% if loop.index == 1 %}
+
+              <thead>
+                <tr>
+                  {% for cell in row['values'] %}
+                    {% if cell['formattedValue'] is not none and cell['formattedValue'] != '' and cell['formattedValue'] is defined %}
+
+                      <td style="background-color: {{cell['backgroundColor']}}; color: {{cell['foregroundColor']}}">{{ cell['formattedValue'] }}</td>
+                    {% else %}
+
+                      <td style="background-color: {{cell['backgroundColor']}}; color: {{cell['foregroundColor']}}"></td>
+
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+              </thead>
+          {% else %}
+
+
+
+              <tbody>
+                <tr>
+                  {% for cell in row['values'] %}
+                    {% if cell['formattedValue'] is not none and cell['formattedValue'] != '' and cell['formattedValue'] is defined %}
+
+                      {% set _ = glob.update({'backgroundColor': cell['backgroundColor']}) %}
+                      <td style="background-color: {{cell['backgroundColor']}}; color: {{cell['foregroundColor']}}; border-left: 2px solid #424242; border-top: 2px solid #424242; border-bottom: 2px solid #424242;">{{ cell['formattedValue'] }}</td>
+
+                    {% else %}
+                      {% if cell['backgroundColor'] is not none  and cell['backgroundColor'] != '' and cell['backgroundColor'] is defined %}
+                        <td style="background-color: {{cell['backgroundColor']}}; color: {{cell['foregroundColor']}}; border-left: 2px solid #424242; border-top: 2px solid #424242; border-bottom: 2px solid #424242;"></td>
+                      {% else %}
+                        <td style="background-color: {{glob['backgroundColor']}}; color: {{cell['foregroundColor']}}; border-top: 2px solid #424242; border-bottom: 2px solid #424242;"></td>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+              </tbody>
+
+
+          {% endif %}
+        {% endfor %}
+      </table>
+
+  </div>
+
+
+  </main>
+{% endif %}
+{% endblock %}

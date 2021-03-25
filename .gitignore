@@ -3,9 +3,13 @@ config/.env
 
 # gitcommands
 .gitcommand
+.gitignore
 
 # exclude venv
 venv/*
 
-#exclude scripts
+# exclude scripts
 scripts/*
+
+# exclude credetials
+credentials/*

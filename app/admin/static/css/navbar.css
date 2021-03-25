@@ -125,3 +125,26 @@ input.me-2 {
 body {
   background: #505352;
 }
+
+.blog-footer {
+  padding: 1.5rem 0;
+  color: #999;
+  width: 100%;
+  text-align: center;
+  background-color: #424242;
+  margin-top: 1rem;
+  clear: both;
+
+  /* position: fixed;
+  bottom: 0; */
+
+}
+
+.blog-footer a {
+  text-decoration: none;
+  color: #0dcaf0;
+}
+
+.blog-footer a:hover {
+  color: #8eecff;
+}

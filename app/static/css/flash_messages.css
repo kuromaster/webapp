@@ -1,0 +1,17 @@
+/* Message */
+.msg-flash {
+  /* display: contents; */
+  /* color: #fff; */
+  /* background-color: #ee231d; */
+  /* background-color: #cc5511; */
+  /* background-color: #999999; */
+  margin: 23px 3px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.alert {
+  text-align: center;
+}

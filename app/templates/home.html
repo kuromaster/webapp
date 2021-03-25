@@ -7,6 +7,7 @@
 
 
 {% block body %}
+{% include "security/_messages.html" %}
 
 {% if current_user.is_authenticated %}
 <main class="container">

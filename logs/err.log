@@ -1398,3 +1398,103 @@ sqlalchemy.exc.StatementError: (builtins.TypeError) Not a boolean value: '1'
 [SQL: UPDATE user SET login=%(login)s, email=%(email)s, created=%(created)s, active=%(active)s WHERE user.id = %(id_1)s]
 [parameters: [immutabledict({})]]
  
+
+[2021-03-24 15:15:13] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 48, in get_spreadheets
+    service = build('sheets', 'v4', credentials=self._get_spreadheets())
+AttributeError: 'MySpreadSheet' object has no attribute '_get_spreadheets'
+ 
+
+[2021-03-24 15:16:04] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 48, in get_spreadheets
+    service = build('sheets', 'v4', credentials=self._get_credentials())
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 36, in _get_credentials
+    flow = InstalledAppFlow.from_client_secrets_file(self._credentials_file, app.config['SCOPES'])  # here enter the name of your downloaded JSON file
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/venv/lib/python3.8/site-packages/google_auth_oauthlib/flow.py", line 203, in from_client_secrets_file
+    with open(client_secrets_file, "r") as json_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'credentials/client_secret.json'
+ 
+
+[2021-03-24 15:19:15] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 48, in get_spreadheets
+    service = build('sheets', 'v4', credentials=self._get_credentials())
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 29, in _get_credentials
+    with open('token.pickle', 'rb') as token:
+FileNotFoundError: [Errno 2] No such file or directory: 'token.pickle'
+ 
+
+[2021-03-24 15:21:36] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 50, in get_spreadheets
+    service = build('sheets', 'v4', credentials=self._get_credentials())
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 31, in _get_credentials
+    with open('token.pickle', 'rb') as token:
+FileNotFoundError: [Errno 2] No such file or directory: 'token.pickle'
+ 
+
+[2021-03-24 15:23:15] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 57, in get_spreadheets
+    service = build('sheets', 'v4', credentials=self._get_credentials())
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 32, in _get_credentials
+    with open('token.pickle', 'rb') as token:
+FileNotFoundError: [Errno 2] No such file or directory: 'token.pickle'
+ 
+
+[2021-03-25 13:45:58] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 137, in get_sheet_values_hard
+    for cell in row['values']:
+TypeError: string indices must be integers
+ 
+
+[2021-03-25 14:07:51] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 137, in get_sheet_values_hard
+    for cell in row[0]['values']:
+TypeError: string indices must be integers
+ 
+
+[2021-03-25 14:20:17] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 137, in get_sheet_values_hard
+    for cell in row[0]['values']:
+KeyError: 0
+ 
+
+[2021-03-25 14:21:03] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 141, in get_sheet_values_hard
+    backgroundColor = Color.toHex(cell.get('backgroundColor').get('red'), cell.get('backgroundColor').get('green'), cell.get('backgroundColor').get('blue'))
+AttributeError: 'NoneType' object has no attribute 'get'
+ 
+
+[2021-03-25 14:23:16] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 142, in get_sheet_values_hard
+    backgroundColor = Color.toHex(cell.get('backgroundColor').get('red'), cell.get('backgroundColor').get('green'), cell.get('backgroundColor').get('blue'))
+AttributeError: 'NoneType' object has no attribute 'get'
+ 
+
+[2021-03-25 14:26:34] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 137, in get_sheet_values_hard
+    for cell in row['values']:
+KeyError: 'values'
+ 
+
+[2021-03-25 14:41:01] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 144, in get_sheet_values_hard
+    backgroundColor = Color.toHex(cell.get('userEnteredFormat').get('backgroundColor').get('red'), cell.get('userEnteredFormat').get('backgroundColor').get('green'), cell.get('userEnteredFormat').get('backgroundColor').get('blue'))
+TypeError: toHex() takes 1 positional argument but 3 were given
+ 
+
+[2021-03-25 14:42:18] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 144, in get_sheet_values_hard
+    backgroundColor = Color(cell.get('userEnteredFormat').get('backgroundColor').get('red'), cell.get('userEnteredFormat').get('backgroundColor').get('green'), cell.get('userEnteredFormat').get('backgroundColor').get('blue')).toHex()
+TypeError: toHex() takes 1 positional argument but 3 were given
+ 
+
+[2021-03-25 14:52:49] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 147, in get_sheet_values_hard
+    foregroundColor = Color(cell.get('userEnteredFormat').get('textFormat').get('foregroundColor').get('red'), cell.get('userEnteredFormat').get('textFormat').get('foregroundColor').get('green'), cell.get('userEnteredFormat').get('textFormat').get('foregroundColor').get('blue')).toHex()
+AttributeError: 'NoneType' object has no attribute 'get'
+ 
+
+[2021-03-25 15:11:17] [ERROR] Traceback (most recent call last):
+  File "/mnt/data/projects/python/webapp/flask/engilogic/v3/webapp/app/get_spreadsheet.py", line 148, in get_sheet_values_hard
+    if 'red' in cell.get('userEnteredFormat').get('textFormat').get('foregroundColor'):
+AttributeError: 'NoneType' object has no attribute 'get'
+ 

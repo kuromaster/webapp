@@ -58,3 +58,6 @@ google = oauth.register(
     userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',  # This is only needed if using openId to fetch user info
     client_kwargs={'scope': 'openid email profile'},
 )
+
+from app.get_spreadsheet import MySpreadSheet
+myspreadsheet = MySpreadSheet(spreadsheet_id=app.config['SPREADSHEET_ID'], range=app.config['SPREADSHEET_RANGE'])

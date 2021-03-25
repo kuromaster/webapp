@@ -4,7 +4,11 @@
 
     <div class="msg-flash" style=" -moz-animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation: cssAnimation 0s ease-in 3s forwards; -o-animation: cssAnimation 0s ease-in 3s forwards; animation: cssAnimation 0s ease-in 3s forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;">
       {% for category, message in messages %}
-        <p class="alert alert-{{category}}">{{ message }}</p>
+        {% if category == 'error' %}
+          <p class="alert alert-danger">{{ message }}</p>
+        {% else %}
+          <p class="alert alert-{{category}}">{{ message }}</p>
+        {% endif %}
       {% endfor %}
     </div>
 

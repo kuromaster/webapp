@@ -9,9 +9,10 @@
 {% block body %}
 
 {% if current_user.is_authenticated %}
+{% include "security/_messages.html" %}
   <main class="container">
     <div class="bg-light p-5 rounded txtblock">
-      <h1>Таблица клиентов подключеных к смс оповещению</h1>
+      <h1 style="background-color: #b7e1cd ">Таблица клиентов подключеных к смс оповещению</h1>
       <br>
       <p class="lead"> Здесь можно отредактировать:</p>
       <ul>

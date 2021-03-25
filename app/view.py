@@ -4,9 +4,10 @@ from flask import request
 from flask import url_for
 from flask import flash, session, jsonify
 from datetime import datetime as dt
-from app import app, oauth, user_datastore, db, User, Customer
+from app import app, oauth, user_datastore, db, User, Customer, myspreadsheet
 from flask_security import login_required, current_user, login_user
 import subprocess
+import json
 
 from config.config import Configuration
 from app.color_print import cprint
@@ -68,6 +69,11 @@ def update_cur_login_at():
     # cprint("CYAN", "[update_cur_login_at] SESSION: {}".format(dict(session)))
 
 
+'''
+    Google Authentication
+'''
+
+
 # NOTE: Google auth. Перенаправление в гугл
 @app.route('/login/google')
 def google_login():
@@ -114,6 +120,11 @@ def google_auth():
     return redirect('/')
 
 
+'''
+    ДОМАШНЯЯ СТРАНИЦА
+'''
+
+
 # NOTE: Домашняя страница
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
@@ -122,6 +133,11 @@ def home():
     cprint("YELLOW", "User name: {} lastname: {}".format(current_user.name, current_user.lastname))
 
     return render_template("home.html", pgname="Home", company=Configuration.HTML_TITLE_COMPANY, User=session["User"])
+
+
+'''
+    Вьюхи СМС таблицы
+'''
 
 
 # NOTE: Страница с смс таблицей
@@ -156,8 +172,38 @@ def updatesmsdelivery():
     return jsonify({'message': message})
 
 
+# NOTE: Обновление таблицы Customer. Загрузка данных из джиры
 @app.route('/syncdatafromjira')
 def syncdatafromjira():
     output = subprocess.getoutput("{}/scripts/get_customers.sh".format(app.config['WORK_DIR']))
     cprint("PURPLE", "Sync output: {}".format(output))
     return jsonify({'message': "success"})
+
+
+'''
+    Google spreadsheet
+'''
+
+
+# NOTE: Страница гугл таблицы
+@app.route('/gspreadsheet', methods=['GET'])
+def gspreadsheet():
+    # table = myspreadsheet.get_sheet_values()
+    table = None
+    debug = myspreadsheet.get_sheet_values_hard()
+
+
+    # return render_template("gspread.html", pgname="Gspread", company=html_title_company)
+    # return jsonify(rows)
+    return render_template("gspreadsheet.html", pgname="gSpreadSheet", company=app.config['HTML_TITLE_COMPANY'], table=table, User=session["User"], debug=debug)
+
+
+# NOTE: Страница гугл таблицы в json формате
+@app.route('/googlesheets', methods=['GET'])
+def gspreadsheet_debug():
+    # table = myspreadsheet.get_sheet_values()
+    data = myspreadsheet.get_sheet_colors()
+
+    # return render_template("gspread.html", pgname="Gspread", company=html_title_company)
+    return jsonify(data)
+    # return render_template("gspreadsheet.html", pgname="gSpreadSheet", company=app.config['HTML_TITLE_COMPANY'], table=table, User=session["User"])
